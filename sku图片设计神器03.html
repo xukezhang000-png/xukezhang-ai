@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐课长AI数字资产 | 虚拟SKU六大关爱排版引擎</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --panel-bg: #1e1e1e;
+            --primary: #e02e24;
+            --accent: #f1c40f;
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        /* 品牌水印 */
+        .watermark-layer {
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            z-index: 0; pointer-events: none;
+            display: flex; flex-wrap: wrap; transform: rotate(-15deg); opacity: 0.04;
+        }
+        .watermark-item {
+            flex: 0 0 auto; margin: 100px; font-size: 16px; color: #fff;
+            font-family: 'Georgia', serif; font-weight: bold;
+        }
+
+        .container {
+            position: relative; z-index: 10;
+            max-width: 1400px; margin: 0 auto;
+        }
+
+        /* 头部 */
+        .header {
+            text-align: center; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 20px;
+        }
+        .header h1 {
+            color: var(--accent); font-size: 36px; margin: 0; font-weight: 900;
+        }
+        .header p { font-size: 16px; color: #888; margin-top: 10px; }
+
+        /* 操作台布局 */
+        .workspace {
+            display: grid; grid-template-columns: 350px 1fr; gap: 40px;
+        }
+
+        /* 左侧控制区 */
+        .control-panel {
+            background: var(--panel-bg); padding: 30px;
+            border-radius: 20px; border: 1px solid #333;
+            height: fit-content; position: sticky; top: 20px;
+        }
+        
+        .form-group { margin-bottom: 25px; }
+        label { display: block; font-size: 14px; color: #aaa; margin-bottom: 10px; font-weight: bold; }
+        
+        input, textarea, select {
+            width: 100%; padding: 15px;
+            background: #2a2a2a; border: 2px solid #444;
+            color: #fff; border-radius: 10px; box-sizing: border-box;
+            font-size: 16px; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: var(--accent); outline: none; background: #333; }
+        textarea { height: 120px; resize: vertical; font-size: 18px; line-height: 1.4; }
+
+        .btn-gen {
+            width: 100%; padding: 20px;
+            background: linear-gradient(135deg, #e02e24, #c0392b);
+            color: #fff; font-size: 20px; font-weight: 900;
+            border: none; border-radius: 12px; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(224, 46, 36, 0.4);
+            transition: 0.2s;
+        }
+        .btn-gen:hover { transform: scale(1.02); }
+
+        /* 右侧展示区：6宫格 */
+        .preview-area {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px;
+        }
+
+        .canvas-card {
+            background: #252525; padding: 15px;
+            border-radius: 15px; text-align: center;
+            border: 2px solid transparent; transition: 0.3s;
+        }
+        .canvas-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        
+        .card-title {
+            display: block; margin-bottom: 15px; font-size: 16px; font-weight: bold; color: #ddd;
+        }
+        
+        canvas {
+            width: 100%; height: auto; border-radius: 8px;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .download-hint {
+            font-size: 12px; color: #666; margin-top: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark-layer" id="bgWatermark"></div>
+
+<div class="container">
+    <div class="header">
+        <h1>虚拟资产 SKU 关爱排版引擎 (V6.0)</h1>
+        <p>徐课长 AI 数字资产 · 6大暴力高点击模板 · 视力保护级大字</p>
+    </div>
+
+    <div class="workspace">
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="form-group">
+                <label>1. 核心标题 (即使字多也会自动变大)</label>
+                <textarea id="mainText" placeholder="例如：
+2025最新
+全套Python教程
+零基础到精通">2025最新
+全套Python教程
+零基础到精通</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>2. 赠品/副标题 (短小精悍)</label>
+                <input type="text" id="subText" value="送源码+软件+永久更新" placeholder="送源码+软件+永久更新">
+            </div>
+
+            <div class="form-group">
+                <label>3. 信任背书角标</label>
+                <select id="badgeText">
+                    <option value="自动发货">⚡ 自动发货</option>
+                    <option value="包更新">🔄 包更新</option>
+                    <option value="永久使用">∞ 永久使用</option>
+                    <option value="店长推荐">👍 店长推荐</option>
+                    <option value="全网独家">🔥 全网独家</option>
+                    <option value="">(不显示)</option>
+                </select>
+            </div>
+
+            <button class="btn-gen" onclick="renderAll()">🚀 一键生成 6 套方案</button>
+            <p style="font-size:12px; color:#666; text-align:center; margin-top:15px;">点击右侧任意图片即可下载</p>
+        </div>
+
+        <!-- 6大预览区 -->
+        <div class="preview-area">
+            
+            <!-- 方案1 -->
+            <div class="canvas-card">
+                <span class="card-title">🔥 1. 暴力红黄 (促销/急用)</span>
+                <canvas id="cvs1" width="800" height="800"></canvas>
+            </div>
+
+            <!-- 方案2 -->
+            <div class="canvas-card">
+                <span class="card-title">👑 2. 尊贵黑金 (VIP/高价课)</span>
+                <canvas id="cvs2" width="800" height="800"></canvas>
+            </div>
+
+            <!-- 方案3 -->
+            <div class="canvas-card">
+                <span class="card-title">💻 科技蓝光 (软件/源码)</span>
+                <canvas id="cvs3" width="800" height="800"></canvas>
+            </div>
+
+            <!-- 方案4 -->
+            <div class="canvas-card">
+                <span class="card-title">📝 资料清单 (素材/模板)</span>
+                <canvas id="cvs4" width="800" height="800"></canvas>
+            </div>
+
+            <!-- 方案5 -->
+            <div class="canvas-card">
+                <span class="card-title">🏫 学霸墨绿 (考试/考证)</span>
+                <canvas id="cvs5" width="800" height="800"></canvas>
+            </div>
+
+            <!-- 方案6 -->
+            <div class="canvas-card">
+                <span class="card-title">⚠️ 警戒醒目 (必读/稀缺)</span>
+                <canvas id="cvs6" width="800" height="800"></canvas>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        const container = document.getElementById('bgWatermark');
+        const text = `徐课长AI数字资产 XKZ201202`;
+        for(let i=0; i<30; i++) {
+            let div = document.createElement('div');
+            div.className = 'watermark-item';
+            div.innerText = text;
+            container.appendChild(div);
+        }
+        renderAll();
+    }
+
+    function renderAll() {
+        const title = document.getElementById('mainText').value;
+        const sub = document.getElementById('subText').value;
+        const badge = document.getElementById('badgeText').value;
+
+        drawStyle1('cvs1', title, sub, badge); // 暴力红
+        drawStyle2('cvs2', title, sub, badge); // 黑金
+        drawStyle3('cvs3', title, sub, badge); // 科技蓝
+        drawStyle4('cvs4', title, sub, badge); // 清单白
+        drawStyle5('cvs5', title, sub, badge); // 墨绿
+        drawStyle6('cvs6', title, sub, badge); // 警戒黄
+    }
+
+    // ============================================
+    // 🎨 6大核心绘图算法 (关爱版：字号极大，对比极强)
+    // ============================================
+
+    // 1. 暴力红黄 (拼多多经典高点击)
+    function drawStyle1(id, title, sub, badge) {
+        const ctx = setupCanvas(id);
+        // 背景
+        ctx.fillStyle = '#e02e24';
+        ctx.fillRect(0, 0, 800, 800);
+        // 边框
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 20;
+        ctx.strokeRect(30, 30, 740, 740);
+        // 主标题
+        ctx.fillStyle = '#fffae8'; // 暖白
+        drawHugeText(ctx, title, 400, 380, 700, 110, '#f1c40f'); // 描边黄
+        // 副标题底块
+        ctx.fillStyle = '#000';
+        ctx.fillRect(50, 600, 700, 120);
+        // 副标题
+        ctx.fillStyle = '#f1c40f'; // 亮黄
+        ctx.font = 'bold 50px "Microsoft YaHei"';
+        ctx.fillText(sub, 400, 660);
+        // 角标
+        if(badge) drawBadge(ctx, badge, '#f1c40f', '#e02e24');
+    }
+
+    // 2. 尊贵黑金 (VIP质感)
+    function drawStyle2(id, title, sub, badge) {
+        const ctx = setupCanvas(id);
+        // 背景
+        const grad = ctx.createLinearGradient(0,0,800,800);
+        grad.addColorStop(0, '#2d2d2d');
+        grad.addColorStop(1, '#000000');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 800, 800);
+        // 金框
+        ctx.strokeStyle = '#d4af37';
+        ctx.lineWidth = 15;
+        ctx.strokeRect(20, 20, 760, 760);
+        // 主标题
+        ctx.fillStyle = '#d4af37'; // 香槟金
+        drawHugeText(ctx, title, 400, 380, 720, 110, '#000'); 
+        // 副标题
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 45px "Microsoft YaHei"';
+        ctx.fillText(sub, 400, 650);
+        // 装饰线
+        ctx.beginPath(); ctx.moveTo(200, 600); ctx.lineTo(600, 600); 
+        ctx.strokeStyle = '#d4af37'; ctx.stroke();
+        // 角标
+        if(badge) drawBadge(ctx, badge, '#d4af37', '#000');
+    }
+
+    // 3. 科技蓝光 (软件源码)
+    function drawStyle3(id, title, sub, badge) {
+        const ctx = setupCanvas(id);
+        // 背景
+        ctx.fillStyle = '#0a1a3c'; // 深蓝
+        ctx.fillRect(0, 0, 800, 800);
+        // 网格
+        drawGrid(ctx);
+        // 主标题 (发光)
+        ctx.shadowColor = '#00d2ff';
+        ctx.shadowBlur = 20;
+        ctx.fillStyle = '#fff';
+        drawHugeText(ctx, title, 400, 380, 720, 110);
+        ctx.shadowBlur = 0;
+        // 副标题框
+        ctx.strokeStyle = '#00d2ff';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(100, 580, 600, 100);
+        ctx.fillStyle = '#00d2ff';
+        ctx.font = 'bold 40px "Microsoft YaHei"';
+        ctx.fillText(sub, 400, 630);
+        // 角标
+        if(badge) drawBadge(ctx, badge, '#00d2ff', '#fff');
+    }
+
+    // 4. 资料清单 (极致清晰)
+    function drawStyle4(id, title, sub, badge) {
+        const ctx = setupCanvas(id);
+        // 背景
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 800, 800);
+        // 顶部红条
+        ctx.fillStyle = '#e02e24';
+        ctx.fillRect(0, 0, 800, 150);
+        // 顶部字
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 80px "Microsoft YaHei"';
+        ctx.fillText("资源清单", 400, 80);
+        // 主标题 (黑字)
+        ctx.fillStyle = '#000';
+        drawHugeText(ctx, title, 400, 400, 750, 110);
+        // 副标题 (作为列表项)
+        ctx.fillStyle = '#e02e24';
+        ctx.font = 'bold 45px "Microsoft YaHei"';
+        ctx.fillText("✔ " + sub, 400, 680);
+        // 边框
+        ctx.strokeStyle = '#e02e24';
+        ctx.lineWidth = 10;
+        ctx.strokeRect(0,0,800,800);
+        // 角标
+        if(badge) drawBadge(ctx, badge, '#e02e24', '#fff');
+    }
+
+    // 5. 学霸墨绿 (考试考证)
+    function drawStyle5(id, title, sub, badge) {
+        const ctx = setupCanvas(id);
+        // 背景
+        ctx.fillStyle = '#1e4d2b'; // 墨绿
+        ctx.fillRect(0, 0, 800, 800);
+        // 边框
+        ctx.strokeStyle = '#c8a165'; // 浅金
+        ctx.lineWidth = 15;
+        ctx.strokeRect(20, 20, 760, 760);
+        // 主标题 (白)
+        ctx.fillStyle = '#fff';
+        drawHugeText(ctx, title, 400, 380, 720, 110);
+        // 副标题 (金)
+        ctx.fillStyle = '#c8a165';
+        ctx.font = 'bold 50px "Microsoft YaHei"';
+        ctx.fillText("【 " + sub + " 】", 400, 650);
+        // 角标
+        if(badge) drawBadge(ctx, badge, '#fff', '#1e4d2b');
+    }
+
+    // 6. 警戒醒目 (工业警示风)
+    function drawStyle6(id, title, sub, badge) {
+        const ctx = setupCanvas(id);
+        // 背景
+        ctx.fillStyle = '#fce205'; // 警示黄
+        ctx.fillRect(0, 0, 800, 800);
+        // 斑马线
+        ctx.fillStyle = '#000';
+        for(let i=0; i<800; i+=100) {
+            ctx.fillRect(i, 0, 50, 40); // 顶部斑马线
+            ctx.fillRect(i, 760, 50, 40); // 底部斑马线
+        }
+        // 主标题 (极黑)
+        ctx.fillStyle = '#000';
+        drawHugeText(ctx, title, 400, 400, 750, 110);
+        // 副标题
+        ctx.fillStyle = '#e02e24'; // 红字强调
+        ctx.font = 'bold 55px "Microsoft YaHei"';
+        ctx.fillText(sub, 400, 680);
+        // 角标
+        if(badge) drawBadge(ctx, badge, '#000', '#fce205');
+    }
+
+    // --- 🛠️ 核心工具函数 ---
+
+    function setupCanvas(id) {
+        const c = document.getElementById(id);
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0,0,c.width,c.height);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // 点击下载逻辑
+        c.onclick = () => {
+            const link = document.createElement('a');
+            link.download = `徐课长_虚拟SKU_${id}_${Date.now()}.png`;
+            link.href = c.toDataURL();
+            link.click();
+        };
+        return ctx;
+    }
+
+    // 🌟 关爱版核心：超大字号自动换行算法
+    function drawHugeText(ctx, text, x, y, maxWidth, lineHeight, strokeColor=null) {
+        // 强制大字号
+        let fontSize = 110; 
+        if(text.length > 8) fontSize = 100;
+        if(text.length > 15) fontSize = 85;
+        if(text.length > 30) fontSize = 70;
+
+        ctx.font = `900 ${fontSize}px "Microsoft YaHei"`;
+        if(strokeColor) {
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = strokeColor;
+        }
+
+        const lines = text.split('\n'); // 优先手动换行
+        let finalLines = [];
+
+        // 再次检查自动换行
+        lines.forEach(line => {
+            let words = line.split('');
+            let currentLine = '';
+            for(let n = 0; n < words.length; n++) {
+                let testLine = currentLine + words[n];
+                let width = ctx.measureText(testLine).width;
+                if (width > maxWidth && n > 0) {
+                    finalLines.push(currentLine);
+                    currentLine = words[n];
+                } else {
+                    currentLine = testLine;
+                }
+            }
+            finalLines.push(currentLine);
+        });
+
+        // 垂直居中绘制
+        let startY = y - ((finalLines.length - 1) * lineHeight) / 2;
+        finalLines.forEach((l, i) => {
+            if(strokeColor) ctx.strokeText(l, x, startY + (i * lineHeight));
+            ctx.fillText(l, x, startY + (i * lineHeight));
+        });
+    }
+
+    function drawBadge(ctx, text, bgColor, textColor) {
+        ctx.save();
+        ctx.translate(0, 0);
+        // 三角底
+        ctx.beginPath();
+        ctx.moveTo(0, 0); ctx.lineTo(260, 0); ctx.lineTo(0, 260);
+        ctx.fillStyle = bgColor;
+        ctx.fill();
+        // 文字
+        ctx.translate(90, 90);
+        ctx.rotate(-45 * Math.PI / 180);
+        ctx.fillStyle = textColor;
+        ctx.font = 'bold 45px "Microsoft YaHei"';
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
+    }
+
+    function drawGrid(ctx) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+        ctx.lineWidth = 2;
+        for(let i=0; i<800; i+=80) {
+            ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,800); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(800,i); ctx.stroke();
+        }
+    }
+</script>
+
+</body>
