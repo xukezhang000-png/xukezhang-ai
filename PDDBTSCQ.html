@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐课长AI数字资产 | 爆款标题商业融合版</title>
+    <style>
+        :root {
+            /* 融合配色：高端商务白 + 拼多多红 + 鎏金 */
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --primary-red: #e02e24;
+            --gradient-red: linear-gradient(135deg, #e02e24 0%, #ff5c5c 100%);
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --gold-accent: #d4a017;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-hover: 0 15px 40px rgba(224, 46, 36, 0.15);
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ==================== 
+           融合版水印：轻奢银灰 + 倾斜防伪风格
+           ==================== */
+        .watermark-layer {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+            transform: rotate(-30deg);
+            opacity: 0.06; /* 极淡，不干扰阅读 */
+        }
+        .watermark-item {
+            flex: 0 0 auto;
+            margin: 60px 80px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+            text-align: center;
+            line-height: 1.8;
+            font-family: 'Georgia', serif; /* 增加一点衬线感的商业气息 */
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px; /* 加宽 */
+            margin: 0 auto;
+        }
+
+        /* 头部：保留V4的标签哲学，使用V5的大气排版 */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 0 0 15px 0;
+            letter-spacing: 1px;
+        }
+        .header .badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .badge {
+            background: #fff;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-sub);
+            border: 1px solid #e1e1e1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            font-weight: 600;
+        }
+        .badge.gold { border-color: var(--gold-accent); color: #b7890b; }
+
+        /* 配置区：隐蔽但易用 */
+        .config-wrap {
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+        .config-header {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--primary-red);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .config-body {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        .config-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background: #fcfcfc;
+        }
+
+        /* 核心输入卡片：融合 V5的大尺寸 + V4的质感 */
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .main-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .input-label {
+            font-size: 24px; /* 关爱版的大字号 */
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        textarea#productInput {
+            width: 100%;
+            height: 160px;
+            padding: 25px;
+            font-size: 26px; /* 融合版大字体 */
+            border: 2px solid #eef0f5;
+            border-radius: 16px;
+            background: #fcfdfe;
+            resize: none;
+            outline: none;
+            box-sizing: border-box;
+            color: #333;
+            transition: 0.3s;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+        textarea#productInput:focus {
+            border-color: var(--primary-red);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(224, 46, 36, 0.1);
+        }
+
+        button#generateBtn {
+            width: 100%;
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--gradient-red);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px; /* 全圆角 */
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(224, 46, 36, 0.3);
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        button#generateBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(224, 46, 36, 0.4);
+        }
+        button#generateBtn:active { transform: scale(0.98); }
+        button#generateBtn:disabled { background: #bdc3c7; cursor: not-allowed; box-shadow: none; }
+
+        /* 结果区域 */
+        .results-grid {
+            display: none;
+            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .result-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-soft);
+            border-top: 5px solid #eee;
+        }
+        /* 风格化配色 */
+        .card-traffic { border-top-color: #3498db; }
+        .card-conv { border-top-color: #9b59b6; }
+        .card-promo { border-top-color: var(--primary-red); }
+
+        .card-head {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .card-icon { font-size: 22px; margin-right: 8px; }
+
+        .title-row {
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            position: relative;
+        }
+        .title-row:hover {
+            background: #fff;
+            border-color: var(--gold-accent);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transform: scale(1.01);
+        }
+        .title-row::after {
+            content: '复制';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: var(--primary-red);
+            opacity: 0;
+            transition: 0.2s;
+            border: 1px solid var(--primary-red);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .title-row:hover::after { opacity: 1; }
+
+        /* 底部 */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+        }
+        
+        /* 加载动画 */
+        .loader-box {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-sub);
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+<!-- 底纹层 -->
+<div class="watermark-layer" id="bgWatermark"></div>
+
+<div class="container">
+    
+    <!-- 头部：品牌与哲思 -->
+    <div class="header">
+        <h1>徐课长 · AI爆款标题生成器</h1>
+        <div class="badges">
+            <span class="badge gold">AI商业思维逻辑</span>
+            <span class="badge">算法机制心理学</span>
+            <span class="badge">视觉符号学</span>
+            <span class="badge">人性深度分析</span>
+        </div>
+    </div>
+
+    <!-- API 配置折叠面板 -->
+    <div class="config-wrap">
+        <div class="config-header" onclick="toggleConfig()">
+            <span>⚙️ 连接 AI 大脑 (API Key 设置)</span>
+            <span>▼</span>
+        </div>
+        <div class="config-body" id="configBody">
+            <input type="password" id="apiKey" class="config-input" placeholder="请输入 API Key (OpenAI / DeepSeek / Moonshot)">
+            <input type="text" id="apiUrl" class="config-input" value="https://api.openai.com/v1/chat/completions" placeholder="API Base URL">
+            <input type="text" id="modelName" class="config-input" value="gpt-3.5-turbo" placeholder="模型名称">
+            <div style="font-size:12px; color:#999;">* 设置会自动保存，数据仅在本地处理，安全无忧。</div>
+        </div>
+    </div>
+
+    <!-- 核心操作区：巨物化设计 -->
+    <div class="main-card">
+        <label class="input-label">👇 输入产品名称，一键生成爆款：</label>
+        <textarea id="productInput" placeholder="例如：防晒衣 / 懒人抹布 / 手机支架" onkeydown="if(event.ctrlKey && event.keyCode==13) startEngine()"></textarea>
+        
+        <button id="generateBtn" onclick="startEngine()">
+            <span>🚀</span> 启动 AI 深度分析与生成
+        </button>
+
+        <div class="loader-box" id="loader">
+            <div class="spinner"></div>
+            <div>AI 正在解构算法与人性...</div>
+        </div>
+        <div id="errorMsg" style="color:red; text-align:center; margin-top:15px; display:none;"></div>
+    </div>
+
+    <!-- 结果区：清晰分类 -->
+    <div class="results-grid" id="resultArea">
+        
+        <!-- 流量型 -->
+        <div class="result-card card-traffic">
+            <div class="card-head">
+                <span><span class="card-icon">🌊</span>算法引流型</span>
+            </div>
+            <div id="outTraffic"></div>
+        </div>
+
+        <!-- 转化型 -->
+        <div class="result-card card-conv">
+            <div class="card-head">
+                <span><span class="card-icon">🧠</span>认知转化型</span>
+            </div>
+            <div id="outConv"></div>
+        </div>
+
+        <!-- 促销型 -->
+        <div class="result-card card-promo">
+            <div class="card-head">
+                <span><span class="card-icon">🔥</span>人性促销型</span>
+            </div>
+            <div id="outPromo"></div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 徐课长AI数字资产商业运营 | 融合终极版 V6.0
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        // 1. 生成徐课长专属水印
+        const watermarkContainer = document.getElementById('bgWatermark');
+        const text = `
+            微信公众号：徐课长     微信号：XKZ201202<br>
+            手机号：13683520302  徐课长AI数字资产商业运营
+        `;
+        // 铺满屏幕
+        for(let i=0; i<30; i++) {
+            let div = document.createElement('div');
+            div.className = 'watermark-item';
+            div.innerHTML = text;
+            watermarkContainer.appendChild(div);
+        }
+
+        // 2. 加载配置
+        if(localStorage.getItem('xkz_key')) document.getElementById('apiKey').value = localStorage.getItem('xkz_key');
+        if(localStorage.getItem('xkz_url')) document.getElementById('apiUrl').value = localStorage.getItem('xkz_url');
+        if(localStorage.getItem('xkz_model')) document.getElementById('modelName').value = localStorage.getItem('xkz_model');
+    }
+
+    function toggleConfig() {
+        const body = document.getElementById('configBody');
+        body.style.display = body.style.display === 'block' ? 'none' : 'block';
+    }
+
+    async function startEngine() {
+        const product = document.getElementById('productInput').value.trim();
+        const apiKey = document.getElementById('apiKey').value.trim();
+        const apiUrl = document.getElementById('apiUrl').value.trim();
+        const modelName = document.getElementById('modelName').value.trim();
+
+        const loader = document.getElementById('loader');
+        const resultArea = document.getElementById('resultArea');
+        const errorMsg = document.getElementById('errorMsg');
+        const btn = document.getElementById('generateBtn');
+
+        if (!product) { alert("⚠️ 请输入产品名称"); return; }
+        if (!apiKey) { 
+            alert("⚠️ 请点击上方设置栏，填入您的 API Key"); 
+            toggleConfig();
+            return; 
+        }
+
+        // 保存用户习惯
+        localStorage.setItem('xkz_key', apiKey);
+        localStorage.setItem('xkz_url', apiUrl);
+        localStorage.setItem('xkz_model', modelName);
+
+        // UI 状态切换
+        loader.style.display = 'block';
+        resultArea.style.display = 'none';
+        errorMsg.style.display = 'none';
+        btn.disabled = true;
+        btn.innerHTML = "AI 正在运算中...";
+
+        // 徐课长核心算法思维链 Prompt
+        const systemPrompt = `
+你是由“徐课长”训练的电商搜索算法专家。
+任务：根据用户输入的产品，结合【AI商业思维逻辑】与【拼多多算法机制】，生成三组爆款标题。
+
+请严格执行以下策略：
+1. **Traffic (流量)**：首部必须包含核心大词，利用算法权重。
+2. **Conversion (转化)**：利用认知心理学，击中用户痛点。
+3. **Humanity (人性)**：利用贪婪与紧迫感，使用【】、数字、促销词。
+
+请以纯 JSON 格式输出：
+{
+  "traffic": ["标题1", "标题2", "标题3"],
+  "conversion": ["标题1", "标题2", "标题3"],
+  "promo": ["标题1", "标题2", "标题3"]
+}
+        `.trim();
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: modelName,
+                    messages: [
+                        { role: "system", content: systemPrompt },
+                        { role: "user", content: `产品名称：${product}` }
+                    ],
+                    temperature: 0.8
+                })
+            });
+
+            if (!response.ok) throw new Error("连接失败，请检查 API Key");
+            
+            const data = await response.json();
+            let content = data.choices[0].message.content;
+            
+            // 简单的 JSON 清洗
+            content = content.replace(/```json/g, '').replace(/```/g, '').trim();
+            const json = JSON.parse(content);
+
+            // 渲染结果
+            renderGroup('outTraffic', json.traffic);
+            renderGroup('outConv', json.conversion);
+            renderGroup('outPromo', json.promo);
+
+            resultArea.style.display = 'grid';
+
+        } catch (e) {
+            errorMsg.innerText = "生成出错：" + e.message;
+            errorMsg.style.display = 'block';
+        } finally {
+            loader.style.display = 'none';
+            btn.disabled = false;
+            btn.innerHTML = "🚀 再次生成";
+        }
+    }
+
+    function renderGroup(id, titles) {
+        const container = document.getElementById(id);
+        container.innerHTML = '';
+        titles.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'title-row';
+            div.innerText = t;
+            div.onclick = () => {
+                navigator.clipboard.writeText(t);
+                alert("✅ 复制成功！\n" + t);
+            };
+            container.appendChild(div);
+        });
+    }
+</script>
+
+</body>
+</html>
