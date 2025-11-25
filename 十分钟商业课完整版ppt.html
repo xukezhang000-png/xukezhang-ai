@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业本质25分钟课程 - 徐课长</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            background: #0a0a0a;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 60px 80px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 14px;
+            color: #b8b8b8;
+            font-weight: 300;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #ffa400;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        h3 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffa400;
+            padding-left: 15px;
+            border-left: 5px solid #e94560;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: #b8b8b8;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #ffa400;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .red-highlight {
+            color: #e94560;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .green-highlight {
+            color: #00d9a3;
+            font-weight: 700;
+        }
+
+        .list {
+            text-align: left;
+            margin: 30px auto;
+            max-width: 900px;
+        }
+
+        .list-item {
+            font-size: 26px;
+            line-height: 2;
+            padding-left: 40px;
+            position: relative;
+            color: #e0e0e0;
+        }
+
+        .list-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00d9a3;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        .list-item.cross:before {
+            content: "✗";
+            color: #ff6b6b;
+        }
+
+        .quote-box {
+            background: rgba(102, 126, 234, 0.15);
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 900px;
+            border-radius: 8px;
+        }
+
+        .quote-box p {
+            font-size: 26px;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .case-box {
+            background: rgba(255, 164, 0, 0.1);
+            border: 2px solid #ffa400;
+            padding: 30px;
+            margin: 25px auto;
+            max-width: 900px;
+            border-radius: 12px;
+        }
+
+        .case-title {
+            font-size: 24px;
+            color: #ffa400;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .case-content {
+            font-size: 22px;
+            color: #e0e0e0;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .big-number {
+            font-size: 120px;
+            font-weight: 700;
+            color: #e94560;
+            margin: 30px 0;
+            text-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .icon-item .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .icon-item .text {
+            font-size: 20px;
+            color: #e0e0e0;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px auto;
+            max-width: 1100px;
+        }
+
+        .comparison-item {
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .comparison-item.bad {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+        }
+
+        .comparison-item.good {
+            background: rgba(0, 217, 163, 0.1);
+            border: 2px solid #00d9a3;
+        }
+
+        .pyramid {
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .pyramid-level {
+            text-align: center;
+            padding: 20px;
+            margin: 10px auto;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .pyramid-level:nth-child(1) {
+            width: 60%;
+            background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%);
+        }
+
+        .pyramid-level:nth-child(2) {
+            width: 75%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .pyramid-level:nth-child(3) {
+            width: 90%;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+        }
+
+        .pyramid-level:nth-child(4) {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .control-btn {
+            background: rgba(255, 164, 0, 0.2);
+            border: 2px solid #ffa400;
+            color: #ffa400;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .control-btn:hover {
+            background: #ffa400;
+            color: #1a1a2e;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #ffa400;
+            transition: width 0.3s;
+            z-index: 1001;
+        }
+
+        .qr-code {
+            width: 300px;
+            height: 300px;
+            background: #ffffff;
+            margin: 30px auto;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #333;
+            border: 5px solid #ffa400;
+        }
+
+        .arrow {
+            font-size: 48px;
+            color: #ffa400;
+            margin: 20px 0;
+        }
+
+        .step-box {
+            background: rgba(102, 126, 234, 0.15);
+            padding: 25px;
+            margin: 15px auto;
+            max-width: 850px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-box h4 {
+            font-size: 24px;
+            color: #ffa400;
+            margin-bottom: 12px;
+        }
+
+        .step-box p {
+            font-size: 20px;
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            h2 {
+                font-size: 28px;
+            }
+            h3 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 18px;
+            }
+            .icon-grid {
+                grid-template-columns: 1fr;
+            }
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="presentation" id="presentation">
+        
+        <!-- 第1页：开场痛点 -->
+        <div class="slide active">
+            <h1>为什么90%的创业者<br>每天忙得要死，却赚不到钱？</h1>
+            <div class="subtitle" style="margin-top: 40px;">
+                <p>为什么产品很好，用户就是不买单？</p>
+                <p>为什么同样做内容，别人月入10万你连100都赚不到？</p>
+            </div>
+            <p style="margin-top: 60px; font-size: 20px; color: #b8b8b8;">徐课长商业课</p>
+            <div class="slide-number">1 / 71</div>
+        </div>
+
+        <!-- 第2页：课程价值承诺 -->
+        <div class="slide">
+            <h1><span class="highlight">25分钟</span> × 1套商业操作系统</h1>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">📊</div>
+                    <div class="text">商业本质</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🎯</div>
+                    <div class="text">成交要素</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🚀</div>
+                    <div class="text">四步路径</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🔒</div>
+                    <div class="text">信任构建</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💰</div>
+                    <div class="text">分层变现</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">⚡</div>
+                    <div class="text">爆款内容</div>
+                </div>
+            </div>
+            <p style="margin-top: 40px; color: #ffa400; font-size: 28px; font-weight: 600;">从商业底层逻辑到实战落地方法</p>
+            <div class="slide-number">2 / 71</div>
+        </div>
+
+        <!-- 第3页：悬念钩子 -->
+        <div class="slide">
+            <h2>特别是第18分钟</h2>
+            <div class="big-number">⏰</div>
+            <h1 style="font-size: 48px;">一个让变现效率<br>提升<span class="red-highlight">3-5倍</span>的方法</h1>
+            <div class="arrow">→</div>
+            <p style="font-size: 32px; color: #ffa400; margin-top: 30px;">准备好了吗？我们开始！</p>
+            <div class="slide-number">3 / 71</div>
+        </div>
+
+        <!-- 第4页：故事引入 -->
+        <div class="slide">
+            <h3>真实案例</h3>
+            <div class="case-box">
+                <div class="case-title">宝妈开网店的困境</div>
+                <div class="case-content">
+                    <div class="list">
+                        <div class="list-item">产品质量好（进口）</div>
+                        <div class="list-item">价格便宜30%</div>
+                        <div class="list-item cross">访客有，就是不下单</div>
+                    </div>
+                </div>
+            </div>
+            <h2 style="margin-top: 40px; color: #e94560;">问题出在哪？</h2>
+            <div class="slide-number">4 / 71</div>
+        </div>
+
+        <!-- 第5页：亚当·斯密金句 -->
+        <div class="slide">
+            <p class="subtitle">《国富论》- 亚当·斯密</p>
+            <h1 style="margin: 60px 0;">商业的本质是交换</h1>
+            <div class="arrow">↓</div>
+            <div class="quote-box">
+                <p>交换的不仅是商品<br>更重要的是 → <span class="highlight">信任</span> & <span class="highlight">信息</span></p>
+            </div>
+            <div class="slide-number">5 / 71</div>
+        </div>
+
+        <!-- 第6页：杰克·韦尔奇金句 -->
+        <div class="slide">
+            <p class="subtitle">《商业的本质》- 杰克·韦尔奇</p>
+            <h1 style="margin: 60px 0;">探求真实，建立互信</h1>
+            <div style="margin-top: 80px;">
+                <h2 style="color: #e94560; font-size: 48px;">没有信任</h2>
+                <h2 style="color: #e94560; font-size: 48px;">再好的产品都是垃圾！</h2>
+            </div>
+            <div class="slide-number">6 / 71</div>
+        </div>
+
+        <!-- 第7页：信任公式 -->
+        <div class="slide">
+            <h2 style="font-size: 52px; margin-bottom: 60px;">你在卖的 <span style="color: #ff6b6b;">≠</span> 产品</h2>
+            <div class="arrow">↓</div>
+            <h1 style="margin: 40px 0; font-size: 64px;">你在卖的 = <span class="green-highlight">信任</span></h1>
+            <div class="quote-box" style="margin-top: 60px;">
+                <p style="text-align: center; font-size: 28px;">没有信任 = 没有成交</p>
+            </div>
+            <div class="slide-number">7 / 71</div>
+        </div>
+
+        <!-- 第8页：信息交换模型 -->
+        <div class="slide">
+            <h2>所有交易的本质 = <span class="highlight">信息交换</span></h2>
+            <div class="case-box" style="margin-top: 50px;">
+                <div class="case-title">一杯咖啡 = ?</div>
+                <div class="case-content" style="text-align: center;">
+                    <p style="font-size: 28px; margin: 20px 0;">咖啡豆 <span style="color: #ff6b6b;">✗</span></p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 24px; color: #00d9a3;">文化 + 体验 + 生活方式 + 身份认同 <span style="color: #00d9a3;">✓</span></p>
+                </div>
+            </div>
+            <h3 style="margin-top: 50px; border: none; padding: 0; text-align: center;">商品 = 信息的载体</h3>
+            <div class="slide-number">8 / 71</div>
+        </div>
+
+        <!-- 第9页：核心竞争力公式 -->
+        <div class="slide">
+            <h2>核心竞争力 = <span class="highlight">信息整合能力</span> × <span class="highlight">信任构建能力</span></h2>
+            <div style="margin: 60px auto; max-width: 700px;">
+                <div class="step-box">
+                    <h4>1. 整合有价值的信息</h4>
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div class="step-box">
+                    <h4>2. 用产品/内容/场景包装</h4>
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div class="step-box">
+                    <h4>3. 用信任降低交换摩擦</h4>
+                </div>
+            </div>
+            <div class="quote-box">
+                <p style="text-align: center; font-size: 30px; font-weight: 700;">商业的终极竞争 = 信息 × 信任</p>
+            </div>
+            <div class="slide-number">9 / 71</div>
+        </div>
+
+        <!-- 第10页：痛点场景 -->
+        <div class="slide">
+            <h2>你是否遇到过？</h2>
+            <div style="margin: 60px 0;">
+                <h1 style="font-size: 42px; margin: 25px 0;">有流量 → 有用户 → <span class="red-highlight">不下单？</span></h1>
+            </div>
+            <div class="big-number">❓</div>
+            <h2 style="color: #ffa400; margin-top: 40px;">问题出在哪？</h2>
+            <div class="slide-number">10 / 71</div>
+        </div>
+
+        <!-- 第11页：成交三要素模型 -->
+        <div class="slide">
+            <h2>成交三要素（缺一不可）</h2>
+            <div style="margin: 60px auto; max-width: 600px; position: relative; height: 400px;">
+                <div style="width: 0; height: 0; border-left: 250px solid transparent; border-right: 250px solid transparent; border-bottom: 400px solid rgba(255, 164, 0, 0.2); margin: 0 auto; position: relative;">
+                    <div style="position: absolute; top: 50px; left: 50%; transform: translateX(-50%); color: #ffa400; font-size: 32px; font-weight: 700;">需求</div>
+                    <div style="position: absolute; bottom: 50px; left: -180px; color: #667eea; font-size: 32px; font-weight: 700;">信任</div>
+                    <div style="position: absolute; bottom: 50px; right: -230px; color: #00d9a3; font-size: 32px; font-weight: 700;">购买力</div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px; border: none; padding: 0; text-align: center; color: #00d9a3;">三者同时具备 = 成交</h3>
+            <div class="slide-number">11 / 71</div>
+        </div>
+
+        <!-- 第12页：需求真伪对比 -->
+        <div class="slide">
+            <h3>需求：真痛点 vs 伪需求</h3>
+            <div class="comparison">
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 28px; color: #ff6b6b; margin-bottom: 20px;">❌ 伪需求</h4>
+                    <p style="font-size: 22px; text-align: left;">"我要减肥"<br>（随口说说）</p>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 28px; color: #00d9a3; margin-bottom: 20px;">✅ 真需求</h4>
+                    <p style="font-size: 22px; text-align: left;">"下个月参加婚礼，<br>必须瘦10斤"<br>（明确+迫切）</p>
+                </div>
+            </div>
+            <div class="quote-box">
+                <p style="text-align: center; font-size: 32px; font-weight: 700; color: #e94560;">需求不对，努力白费！</p>
+            </div>
+            <div class="slide-number">12 / 71</div>
+        </div>
+
+        <!-- 第13页：信任来源 -->
+        <div class="slide">
+            <h3>信任从哪来？</h3>
+            <div class="list" style="margin-top: 60px;">
+                <div class="list-item">📝 长期专业内容输出</div>
+                <div class="list-item">📊 真实案例和成果</div>
+                <div class="list-item">💬 口碑背书和客户见证</div>
+            </div>
+            <div style="margin-top: 80px; background: rgba(233, 69, 96, 0.15); padding: 40px; border-radius: 12px;">
+                <h2 style="color: #e94560; font-size: 36px;">没有信任，价格再低也没用！</h2>
+            </div>
+            <div class="slide-number">13 / 71</div>
+        </div>
+
+        <!-- 第14页：购买力公式 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 40px;">购买力 <span style="color: #ff6b6b;">≠</span> 绝对经济能力</h2>
+            <h1 style="font-size: 52px; margin: 50px 0;">购买力 = 主观"值不值"</h1>
+            <div class="case-box" style="margin-top: 60px;">
+                <div class="case-title">同一个人：</div>
+                <div class="case-content" style="text-align: center;">
+                    <p style="font-size: 28px; margin: 20px 0;">30元咖啡 <span style="color: #00d9a3;">✓</span> 不眨眼</p>
+                    <p style="font-size: 28px; margin: 20px 0;">29元课程 <span style="color: #ffa400;">?</span> 犹豫半天</p>
+                </div>
+            </div>
+            <div class="quote-box" style="margin-top: 40px;">
+                <p style="text-align: center; font-size: 24px;">分期 + 赠品 + 体验装 = 提升购买力感知</p>
+            </div>
+            <div class="slide-number">14 / 71</div>
+        </div>
+
+        <!-- 第15页：自检清单 -->
+        <div class="slide">
+            <h2 style="color: #ffa400; margin-bottom: 50px;">⭐ 停下来，自检一下</h2>
+            <div class="list" style="margin-top: 60px;">
+                <div class="list-item" style="font-size: 28px;">1. 我的用户真的有这个需求吗？</div>
+                <div class="list-item" style="font-size: 28px;">2. 他们为什么要信任我？</div>
+                <div class="list-item" style="font-size: 28px;">3. 我的定价匹配他们的购买力吗？</div>
+            </div>
+            <div style="margin-top: 80px; background: rgba(102, 126, 234, 0.15); padding: 30px; border-radius: 12px;">
+                <p style="font-size: 24px; color: #667eea;">💡 在评论区告诉我你的答案</p>
+            </div>
+            <div class="slide-number">15 / 71</div>
+        </div>
+
+        <!-- 第16页：四步全景图 -->
+        <div class="slide">
+            <h2>从0到1的商业进阶路径</h2>
+            <div style="margin: 60px auto; max-width: 700px;">
+                <div style="background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
+                    第4步：被依赖 ⭐⭐⭐⭐
+                </div>
+                <div class="arrow" style="text-align: center;">↑</div>
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
+                    第3步：被需要 ⭐⭐⭐
+                </div>
+                <div class="arrow" style="text-align: center;">↑</div>
+                <div style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
+                    第2步：被认可 ⭐⭐
+                </div>
+                <div class="arrow" style="text-align: center;">↑</div>
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
+                    第1步：被看见 ⭐
+                </div>
+            </div>
+            <p style="margin-top: 40px; font-size: 24px; color: #ffa400;">每一步都有具体策略</p>
+            <div class="slide-number">16 / 71</div>
+        </div>
+
+        <!-- 第17页：被看见策略 -->
+        <div class="slide">
+            <h3>第1步：被看见</h3>
+            <h2 style="margin: 30px 0; color: #e94560;">注意力经济时代的生存法则</h2>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 26px;">🎣 钩子思维 - 前3秒抓住眼球</div>
+                <div class="list-item" style="font-size: 26px;">📢 高频出镜 - 持续曝光建立记忆</div>
+                <div class="list-item" style="font-size: 26px;">🎬 场景差异 - 独特场景制造记忆点</div>
+            </div>
+            <div style="margin-top: 80px; background: rgba(233, 69, 96, 0.2); padding: 35px; border-radius: 12px;">
+                <h2 style="color: #e94560; font-size: 36px;">默默无闻 = 不存在</h2>
+            </div>
+            <div class="slide-number">17 / 71</div>
+        </div>
+
+        <!-- 继续第18-71页... 由于篇幅限制，我会继续创建剩余页面 -->
+        
+        <!-- 第18页：钩子思维案例 -->
+        <div class="slide">
+            <h3>钩子思维：前3秒决定生死</h3>
+            <div class="comparison">
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 24px; color: #ff6b6b; margin-bottom: 15px;">❌ 《我的创业经验分享》</h4>
+                    <p style="font-size: 20px; text-align: left;">点击率：0.3%</p>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 24px; color: #00d9a3; margin-bottom: 15px;">✅ 《我用这个方法，3个月从负债10万到月入5万》</h4>
+                    <p style="font-size: 20px; text-align: left;">点击率：8.5%</p>
+                </div>
+            </div>
+            <div style="margin-top: 50px; text-align: center;">
+                <div class="big-number" style="font-size: 80px;">28倍</div>
+                <p style="font-size: 24px; color: #00d9a3;">点击率差距</p>
+            </div>
+            <div class="slide-number">18 / 71</div>
+        </div>
+
+        <!-- 第19页：宝妈烘焙案例 -->
+        <div class="slide">
+            <h3>场景差异的力量</h3>
+            <div class="case-box">
+                <div class="case-title">案例：宝妈做烘焙</div>
+                <div class="case-content">
+                    <p style="margin: 20px 0;"><span style="color: #ff6b6b;">Before：</span> 拍拍面包，发朋友圈 → 没人看</p>
+                    <div class="arrow" style="text-align: center; color: #ffa400;">↓</div>
+                    <p style="margin: 20px 0;"><span style="color: #00d9a3;">After：</span> "凌晨3点起床，在昏暗的厨房里一个人揉面烤面包..."</p>
+                    <div class="arrow" style="text-align: center; color: #ffa400;">↓</div>
+                    <h2 style="text-align: center; color: #00d9a3; margin-top: 30px;">爆了！</h2>
+                </div>
+            </div>
+            <div class="quote-box" style="margin-top: 40px;">
+                <p style="text-align: center; font-size: 28px; font-weight: 700;">差异化场景 = 记忆点</p>
+            </div>
+            <div class="slide-number">19 / 71</div>
+        </div>
+
+        <!-- 第20页：被认可策略 -->
+        <div class="slide">
+            <h3>第2步：被认可</h3>
+            <h2 style="margin: 40px 0;">不是靠包装，是靠成果</h2>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 26px;">✍️ 持续专业内容输出</div>
+                <div class="list-item" style="font-size: 26px;">📈 展示真实数据成果</div>
+                <div class="list-item" style="font-size: 26px;">🎯 拆解真实操作过程</div>
+            </div>
+            <div style="margin-top: 70px; background: linear-gradient(135deg, #e94560 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <p style="font-size: 26px; line-height: 1.6;">用户不会因为你说你厉害而信任你<br><span style="font-size: 30px; font-weight: 700;">只会因为看到你做成了什么而认可你</span></p>
+            </div>
+            <div class="slide-number">20 / 71</div>
+        </div>
+
+        <!-- 由于完整HTML太长，我将继续创建关键页面 -->
+        <!-- 为了实用性，我会创建一个完整但精简的版本 -->
+
+        <!-- 第21-70页省略部分类似结构... -->
+        <!-- 直接跳到关键页面和结尾 -->
+                <!-- 第21页：知识博主案例 -->
+        <div class="slide">
+            <h3>知识博主的转化突破</h3>
+            <div class="case-box">
+                <div class="case-title">真实案例</div>
+                <div class="case-content">
+                    <p style="margin: 20px 0;"><span style="color: #ff6b6b;">问题：</span>前3个月每天发内容，粉丝涨了，转化为0</p>
+                    <div class="arrow" style="text-align: center; color: #b8b8b8;">↓</div>
+                    <p style="margin: 20px 0;"><span style="color: #ffa400;">原因：</span>全是理论，没有案例</p>
+                    <div class="arrow" style="text-align: center; color: #00d9a3;">↓</div>
+                    <p style="margin: 20px 0;"><span style="color: #00d9a3;">改变策略：</span></p>
+                    <div class="list">
+                        <div class="list-item">展示真实操作过程</div>
+                        <div class="list-item">分享具体数据</div>
+                        <div class="list-item">拆解踩过的坑</div>
+                    </div>
+                    <h2 style="text-align: center; color: #00d9a3; margin-top: 30px; font-size: 48px;">转化率 × 10 ↗</h2>
+                </div>
+            </div>
+            <div class="slide-number">21 / 71</div>
+        </div>
+
+        <!-- 第22页：被需要策略 -->
+        <div class="slide">
+            <h3>第3步：被需要</h3>
+            <h2 style="margin: 40px 0;">进入用户的刚需场景</h2>
+            <div style="margin-top: 60px;">
+                <div class="step-box">
+                    <h4>核心：洞察真实需求 + 场景化触达</h4>
+                </div>
+            </div>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 26px;">🔍 深度用户调研</div>
+                <div class="list-item" style="font-size: 26px;">📊 持续反馈追踪</div>
+                <div class="list-item" style="font-size: 26px;">🎯 多维场景触达</div>
+            </div>
+            <div style="margin-top: 70px; background: rgba(233, 69, 96, 0.15); padding: 35px; border-radius: 12px;">
+                <h2 style="color: #e94560; font-size: 34px;">你以为的需求 ≠ 用户真正的需求</h2>
+            </div>
+            <div class="slide-number">22 / 71</div>
+        </div>
+
+        <!-- 第23页：PPT模板案例 -->
+        <div class="slide">
+            <h3>需求洞察的威力</h3>
+            <div class="case-box">
+                <div class="case-title">案例：虚拟产品电商</div>
+                <div class="case-content">
+                    <p style="margin: 20px 0; font-size: 24px;"><span style="color: #ff6b6b;">❌ 卖PPT模板</span> → 没人买</p>
+                    <div class="arrow" style="text-align: center; color: #ffa400;">↓</div>
+                    <p style="margin: 20px 0; font-size: 22px;">用户真正需要的是什么？</p>
+                    <div style="background: rgba(255, 164, 0, 0.2); padding: 25px; border-radius: 8px; margin: 25px 0;">
+                        <p style="font-size: 26px; color: #ffa400; font-weight: 700;">快速做出高大上PPT的能力！</p>
+                    </div>
+                    <div class="arrow" style="text-align: center; color: #00d9a3;">↓</div>
+                    <p style="margin: 20px 0; font-size: 24px;"><span style="color: #00d9a3;">✅ 5分钟做出精美PPT的方法 + 配套模板</span></p>
+                    <h2 style="text-align: center; color: #00d9a3; margin-top: 30px; font-size: 52px;">销量 × 10</h2>
+                </div>
+            </div>
+            <div class="slide-number">23 / 71</div>
+        </div>
+
+        <!-- 第24页：被依赖策略 -->
+        <div class="slide">
+            <h3>第4步：被依赖</h3>
+            <h1 style="font-size: 48px; margin: 50px 0;">商业的终极目标</h1>
+            <div class="comparison">
+                <div class="comparison-item" style="background: rgba(255, 164, 0, 0.1); border: 2px solid #ffa400;">
+                    <h4 style="font-size: 28px; color: #ffa400; margin-bottom: 20px;">被需要</h4>
+                    <p style="font-size: 22px; text-align: left;">一次性交易</p>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 28px; color: #00d9a3; margin-bottom: 20px;">被依赖</h4>
+                    <p style="font-size: 22px; text-align: left;">长期复购<br>持续付费<br>离不开你</p>
+                </div>
+            </div>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item">🎨 差异化持续输出</div>
+                <div class="list-item">💎 完善用户服务</div>
+                <div class="list-item">👥 深度社群关系</div>
+            </div>
+            <div class="slide-number">24 / 71</div>
+        </div>
+
+        <!-- 第25页：四步回顾 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 40px;">商业四步路径总结</h2>
+            <div style="margin: 40px auto; max-width: 850px;">
+                <div class="step-box">
+                    <h4>被看见 → 钩子+高频+差异化场景</h4>
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div class="step-box">
+                    <h4>被认可 → 专业内容+真实成果</h4>
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div class="step-box">
+                    <h4>被需要 → 洞察需求+解决真问题</h4>
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div class="step-box">
+                    <h4>被依赖 → 差异化+深度服务</h4>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(102, 126, 234, 0.15); padding: 30px; border-radius: 12px;">
+                <p style="font-size: 26px; color: #667eea;">你现在在哪一步？下一步该做什么？</p>
+            </div>
+            <div class="slide-number">25 / 71</div>
+        </div>
+
+        <!-- 第26页：信任是最大资产 -->
+        <div class="slide">
+            <h2>社交媒体时代的最大资产</h2>
+            <div style="margin: 80px 0;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 60px;">
+                    <div style="text-align: center;">
+                        <h3 style="color: #b8b8b8; border: none; padding: 0;">流量</h3>
+                        <p style="font-size: 20px; color: #b8b8b8; margin-top: 15px;">（租来的）</p>
+                    </div>
+                    <h1 style="font-size: 72px; color: #e94560;">VS</h1>
+                    <div style="text-align: center;">
+                        <h3 style="color: #ffa400; border: none; padding: 0;">信任</h3>
+                        <p style="font-size: 20px; color: #ffa400; margin-top: 15px;">（你的）</p>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-box" style="margin-top: 60px;">
+                <p style="text-align: center; font-size: 32px; font-weight: 700;">10万路人粉 < 1000个信任你的粉丝</p>
+            </div>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 38px;">流量是租来的，信任才是你的</h2>
+            </div>
+            <div class="slide-number">26 / 71</div>
+        </div>
+
+        <!-- 第27页：流量vs信任对比 -->
+        <div class="slide">
+            <h2>平台规则一变，流量就没了</h2>
+            <div class="case-box" style="margin-top: 50px;">
+                <div class="case-title">场景示意</div>
+                <div class="case-content" style="text-align: center;">
+                    <p style="font-size: 28px; margin: 25px 0;">抖音10万粉 → 平台限流 → <span style="color: #ff6b6b; font-size: 36px;">归零</span></p>
+                </div>
+            </div>
+            <h2 style="margin: 60px 0; color: #ffa400; font-size: 42px;">BUT</h2>
+            <div style="background: rgba(0, 217, 163, 0.15); padding: 35px; border-radius: 12px;">
+                <h2 style="color: #00d9a3; font-size: 34px;">信任你的粉丝<br>会跟着你去任何平台</h2>
+            </div>
+            <div class="quote-box" style="margin-top: 50px;">
+                <p style="text-align: center; font-size: 36px; font-weight: 700; color: #ffa400;">一个信任你的粉丝<br>胜过1000个路人</p>
+            </div>
+            <div class="slide-number">27 / 71</div>
+        </div>
+
+        <!-- 第28页：三大内容策略 -->
+        <div class="slide">
+            <h3>信任构建三大策略</h3>
+            <div style="margin-top: 50px;">
+                <div class="step-box">
+                    <h4>策略1：持续输出专业知识</h4>
+                    <p>让用户持续学习成长 → 积累"内容信任"</p>
+                </div>
+                <div class="step-box">
+                    <h4>策略2：输出价值观和个人故事</h4>
+                    <p>巩固个人IP → 提高"情感认同"</p>
+                </div>
+                <div class="step-box">
+                    <h4>策略3：展示真实案例和客户见证</h4>
+                    <p>用成果说话 → 建立"社会信任"</p>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(255, 164, 0, 0.15); padding: 35px; border-radius: 12px;">
+                <p style="font-size: 28px; text-align: center; font-weight: 700;">你输出多少专业内容<br>就能积累多少信任</p>
+            </div>
+            <div class="slide-number">28 / 71</div>
+        </div>
+
+        <!-- 第29页：信息包装三形式 -->
+        <div class="slide">
+            <h3>信息包装的三种形式</h3>
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+                <div style="background: rgba(102, 126, 234, 0.15); padding: 30px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 56px; margin-bottom: 20px;">📝</div>
+                    <h4 style="font-size: 26px; color: #667eea; margin-bottom: 15px;">图文</h4>
+                    <p style="font-size: 18px; text-align: left; line-height: 1.6;">深度、专业、权威<br><br>适合：知识拆解、方法论</p>
+                </div>
+                <div style="background: rgba(255, 164, 0, 0.15); padding: 30px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 56px; margin-bottom: 20px;">📱</div>
+                    <h4 style="font-size: 26px; color: #ffa400; margin-bottom: 15px;">短视频</h4>
+                    <p style="font-size: 18px; text-align: left; line-height: 1.6;">高频、情感、视觉冲击<br><br>适合：场景化内容、爆款引流</p>
+                </div>
+                <div style="background: rgba(0, 217, 163, 0.15); padding: 30px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 56px; margin-bottom: 20px;">🎥</div>
+                    <h4 style="font-size: 26px; color: #00d9a3; margin-bottom: 15px;">直播</h4>
+                    <p style="font-size: 18px; text-align: left; line-height: 1.6;">互动、信任、实时转化<br><br>适合：深度讲解、即时成交</p>
+                </div>
+            </div>
+            <p style="margin-top: 60px; font-size: 24px; color: #ffa400;">根据目标用户选择合适形式</p>
+            <div class="slide-number">29 / 71</div>
+        </div>
+
+        <!-- 第30页：过渡页 -->
+        <div class="slide">
+            <h2>有了信任，下一步是变现</h2>
+            <div class="big-number" style="margin: 60px 0;">💰</div>
+            <h1 style="font-size: 52px; margin: 40px 0;">用户到底愿意<br>为什么付费？</h1>
+            <div style="margin-top: 60px; background: rgba(233, 69, 96, 0.15); padding: 35px; border-radius: 12px;">
+                <p style="font-size: 28px; color: #e94560;">接下来这个模型<br>会颠覆你的认知</p>
+            </div>
+            <div class="arrow" style="font-size: 56px; margin-top: 40px;">→</div>
+            <div class="slide-number">30 / 71</div>
+        </div>
+
+        <!-- 第31页：引入问题 -->
+        <div class="slide">
+            <h2>同样的知识，不同的价格</h2>
+            <div style="margin: 60px auto; max-width: 600px;">
+                <div style="background: rgba(184, 184, 184, 0.1); padding: 20px; border-radius: 8px; margin: 15px 0; font-size: 26px; text-align: center;">
+                    免费 → 有人看
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div style="background: rgba(102, 126, 234, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0; font-size: 26px; text-align: center;">
+                    9.9元 → 有人买
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div style="background: rgba(255, 164, 0, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0; font-size: 26px; text-align: center;">
+                    199元 → 有人买
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div style="background: rgba(0, 217, 163, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0; font-size: 26px; text-align: center;">
+                    999元 → 有人买
+                </div>
+                <div class="arrow" style="text-align: center;">↓</div>
+                <div style="background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; text-align: center; font-weight: 700;">
+                    9999元 → 还有人买！
+                </div>
+            </div>
+            <h1 style="margin-top: 60px; font-size: 56px; color: #e94560;">为什么？</h1>
+            <div class="slide-number">31 / 71</div>
+        </div>
+
+        <!-- 第32页：四阶段模型全景 -->
+        <div class="slide">
+            <h2>用户付费的四个认知阶段</h2>
+            <div class="pyramid" style="margin-top: 60px;">
+                <div class="pyramid-level">
+                    阶段4：风格体验付费（高价值）
+                </div>
+                <div class="pyramid-level">
+                    阶段3：价值认知付费（中等价）
+                </div>
+                <div class="pyramid-level">
+                    阶段2：试探性付费（小额）
+                </div>
+                <div class="pyramid-level">
+                    阶段1：免费获取（大多数人）
+                </div>
+            </div>
+            <p style="margin-top: 60px; font-size: 28px; color: #ffa400;">不同阶段，不同策略</p>
+            <div class="slide-number">32 / 71</div>
+        </div>
+
+        <!-- 第33页：阶段1免费获取 -->
+        <div class="slide">
+            <h3>阶段1：免费获取</h3>
+            <div class="quote-box" style="margin-top: 40px;">
+                <p style="font-size: 24px; font-style: italic;">"网上什么都有，为什么要花钱？"</p>
+            </div>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 24px;">⏰ 时间成本：刷3小时视频，还是一头雾水</div>
+                <div class="list-item" style="font-size: 24px;">🔄 试错成本：尝试10种方法，都不管用</div>
+                <div class="list-item" style="font-size: 24px;">💸 机会成本：别人已经赚到钱了</div>
+            </div>
+            <div style="margin-top: 70px; background: linear-gradient(135deg, #e94560 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 42px;">免费的知识最贵！</h2>
+                <p style="font-size: 22px; margin-top: 20px;">因为你要用时间和试错成本换</p>
+            </div>
+            <div class="slide-number">33 / 71</div>
+        </div>
+
+        <!-- 第34页：时间成本公式 -->
+        <div class="slide">
+            <h3>时间成本计算</h3>
+            <div class="case-box" style="margin-top: 50px;">
+                <div class="case-title">场景：为了找一个方法</div>
+                <div class="case-content">
+                    <div class="list">
+                        <div class="list-item">刷视频：3小时</div>
+                        <div class="list-item">看文章：10篇</div>
+                        <div class="list-item">试错：5次</div>
+                        <div class="list-item cross">结果：还是不会</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin: 50px auto; max-width: 800px; background: rgba(255, 164, 0, 0.15); padding: 35px; border-radius: 12px;">
+                <p style="font-size: 26px; text-align: center; line-height: 1.8;">
+                    时间成本 = 3小时 × 你的时薪<br>
+                    + 试错损失<br>
+                    <span style="font-size: 32px; color: #e94560; font-weight: 700;">>> 付费学习成本</span>
+                </p>
+            </div>
+            <h2 style="margin-top: 50px; color: #ffa400;">你以为省了钱<br>其实浪费的是时间</h2>
+            <div class="slide-number">34 / 71</div>
+        </div>
+
+        <!-- 第35页：阶段2试探性付费 -->
+        <div class="slide">
+            <h3>阶段2：试探性付费</h3>
+            <div class="quote-box" style="margin-top: 40px;">
+                <p style="font-size: 24px; font-style: italic;">"愿意小额付费筛选信息，但还不敢付大钱"</p>
+            </div>
+            <div style="margin: 50px 0;">
+                <h2 style="color: #ffa400;">价格区间：<span style="font-size: 56px;">9.9元 - 99元</span></h2>
+            </div>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 26px;">✓ 体验课</div>
+                <div class="list-item" style="font-size: 26px;">✓ Mini课程</div>
+                <div class="list-item" style="font-size: 26px;">✓ 资料包</div>
+                <div class="list-item" style="font-size: 26px;">✓ 工具包</div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(102, 126, 234, 0.15); padding: 30px; border-radius: 12px;">
+                <p style="font-size: 26px; text-align: center;">用小钱测试你值不值得信任</p>
+            </div>
+            <div class="slide-number">35 / 71</div>
+        </div>
+
+        <!-- 第36页：阶段3价值认知付费 -->
+        <div class="slide">
+            <h3>阶段3：价值认知付费</h3>
+            <div class="quote-box" style="margin-top: 40px;">
+                <p style="font-size: 22px;">这个内容能帮我：</p>
+                <div class="list" style="margin-top: 20px;">
+                    <div class="list-item">节省大量时间</div>
+                    <div class="list-item">避免巨大试错成本</div>
+                    <div class="list-item">带来高额回报</div>
+                </div>
+            </div>
+            <div style="margin: 50px 0;">
+                <h2 style="color: #00d9a3;">价格区间：<span style="font-size: 56px;">199元 - 999元</span></h2>
+            </div>
+            <div style="background: rgba(0, 217, 163, 0.15); padding: 40px; border-radius: 12px; margin-top: 50px;">
+                <h2 style="font-size: 34px; color: #00d9a3; text-align: center; line-height: 1.6;">
+                    花999学一个方法<br>
+                    能帮我赚回10000<br>
+                    <span style="font-size: 48px; margin-top: 20px; display: inline-block;">→ 太值了！</span>
+                </h2>
+            </div>
+            <div class="slide-number">36 / 71</div>
+        </div>
+
+        <!-- 第37页：阶段4风格体验付费 -->
+        <div class="slide">
+            <h3>阶段4：风格体验付费</h3>
+            <h2 style="margin: 40px 0; color: #ffa400; font-size: 38px;">（最高级付费）</h2>
+            <div style="margin: 50px auto; max-width: 700px;">
+                <p style="font-size: 28px; margin-bottom: 30px;">付费对象：</p>
+                <h2 style="font-size: 32px; color: #b8b8b8; text-decoration: line-through; margin-bottom: 20px;">不是知识本身</h2>
+                <div class="arrow">↓</div>
+                <div class="list" style="margin-top: 30px;">
+                    <div class="list-item" style="font-size: 26px;">💎 独特的解读风格</div>
+                    <div class="list-item" style="font-size: 26px;">🎯 认知体系升级</div>
+                    <div class="list-item" style="font-size: 26px;">👥 精英圈层归属感</div>
+                    <div class="list-item" style="font-size: 26px;">🌟 身份认同</div>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 35px; border-radius: 12px;">
+                <p style="font-size: 28px; font-weight: 700;">这是从"买知识"到"买认同"的跨越</p>
+            </div>
+            <div class="slide-number">37 / 71</div>
+        </div>
+
+        <!-- 第38页：樊登/得到案例 -->
+        <div class="slide">
+            <h3>经典案例</h3>
+            <div class="comparison">
+                <div class="comparison-item" style="background: rgba(255, 164, 0, 0.1); border: 2px solid #ffa400;">
+                    <h4 style="font-size: 24px; color: #ffa400; margin-bottom: 20px;">案例1：樊登读书</h4>
+                    <p style="font-size: 20px; text-align: left; line-height: 1.8;">
+                        用户买的不是书的内容<br>
+                        ↓<br>
+                        是樊登的解读风格和认知体系<br><br>
+                        <span style="color: #ffa400; font-weight: 700;">会员：365元/年</span>
+                    </p>
+                </div>
+                <div class="comparison-item" style="background: rgba(0, 217, 163, 0.1); border: 2px solid #00d9a3;">
+                    <h4 style="font-size: 24px; color: #00d9a3; margin-bottom: 20px;">案例2：得到APP</h4>
+                    <p style="font-size: 20px; text-align: left; line-height: 1.8;">
+                        用户买的不只是知识<br>
+                        ↓<br>
+                        是精英阶层的归属感和身份认同<br><br>
+                        <span style="color: #00d9a3; font-weight: 700;">课程：199-299元</span>
+                    </p>
+                </div>
+            </div>
+            <div class="quote-box" style="margin-top: 50px;">
+                <p style="text-align: center; font-size: 30px; font-weight: 700;">高价值付费 = 风格 + 体验 + 归属</p>
+            </div>
+            <div class="slide-number">38 / 71</div>
+        </div>
+
+        <!-- 第39页：两句金句 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 80px;">记住这两句话</h2>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px; border-radius: 12px; margin-bottom: 50px;">
+                <h1 style="font-size: 42px; line-height: 1.6;">免费的知识最贵<br><span style="font-size: 32px; margin-top: 20px; display: inline-block; color: #e0e0e0;">因为你要用时间和试错成本换</span></h1>
+            </div>
+            <div style="background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 50px; border-radius: 12px;">
+                <h1 style="font-size: 42px; line-height: 1.6;">真正高价值的付费<br><span style="font-size: 32px; margin-top: 20px; display: inline-block; color: #e0e0e0;">是为认知升级和精神归属买单</span></h1>
+            </div>
+            <h2 style="margin-top: 80px; color: #e94560; font-size: 38px;">能打穿天花板的<br>一定是第四阶段</h2>
+            <div class="slide-number">39 / 71</div>
+        </div>
+
+        <!-- 第40页：定价困境 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 60px;">定价困境</h2>
+            <div class="comparison">
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 32px; color: #ff6b6b; margin-bottom: 25px;">定价99元</h4>
+                    <div style="font-size: 48px; margin: 30px 0;">😰</div>
+                    <p style="font-size: 24px; text-align: left;">"太便宜，亏本"<br>没利润</p>
+                </div>
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 32px; color: #ff6b6b; margin-bottom: 25px;">定价999元</h4>
+                    <div style="font-size: 48px; margin: 30px 0;">😰</div>
+                    <p style="font-size: 24px; text-align: left;">"太贵，卖不动"<br>没销量</p>
+                </div>
+            </div>
+            <div class="big-number" style="font-size: 100px; margin: 50px 0;">❓</div>
+            <h1 style="font-size: 56px; color: #e94560;">怎么办？</h1>
+            <div class="slide-number">40 / 71</div>
+        </div>
+
+        <!-- 第41页：分层模型全景 -->
+        <div class="slide">
+            <h2>分层变现模型</h2>
+            <div class="pyramid" style="margin-top: 60px;">
+                <div class="pyramid-level" style="width: 50%;">
+                    第3层：高阶服务<br>1999-9999元+<br>利润主阵地
+                </div>
+                <div class="pyramid-level" style="width: 70%;">
+                    第2层：中阶进阶课<br>199-999元<br>建立信任
+                </div>
+                <div class="pyramid-level" style="width: 90%;">
+                    第1层：入门低价课<br>19.9-99元<br>引流获客
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(255, 164, 0, 0.15); padding: 35px; border-radius: 12px;">
+                <h2 style="font-size: 32px; text-align: center;">同一知识，卖出3个价位<br><span style="font-size: 24px; color: #e0e0e0; margin-top: 15px; display: inline-block;">匹配不同需求和付费能力</span></h2>
+            </div>
+            <div class="slide-number">41 / 71</div>
+        </div>
+
+        <!-- 第42页：第1层低价课 -->
+        <div class="slide">
+            <h3>第1层：入门低价课</h3>
+            <h2 style="margin: 40px 0; color: #00d9a3;">定价：<span style="font-size: 52px;">19.9元 - 99元</span></h2>
+            <div style="background: rgba(255, 107, 107, 0.15); padding: 30px; border-radius: 12px; margin: 40px 0;">
+                <h4 style="font-size: 32px; color: #ff6b6b;">⚠️ 目的：不是赚钱，是引流！</h4>
+            </div>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 24px;">📚 7天训练营（9.9元）</div>
+                <div class="list-item" style="font-size: 24px;">📦 工具包+Mini课程（29元）</div>
+                <div class="list-item" style="font-size: 24px;">🎯 一次性主题课（49元）</div>
+            </div>
+            <div class="quote-box" style="margin-top: 50px;">
+                <p style="font-size: 28px; font-weight: 700; text-align: center; color: #ffa400;">低价课 = 流量入口<br>不是利润中心</p>
+            </div>
+            <div class="slide-number">42 / 71</div>
+        </div>
+
+        <!-- 第43页：第2层中阶课 -->
+        <div class="slide">
+            <h3>第2层：中阶进阶课</h3>
+            <h2 style="margin: 40px 0; color: #667eea;">定价：<span style="font-size: 52px;">199元 - 999元</span></h2>
+            <div style="margin: 40px 0;">
+                <p style="font-size: 26px; margin-bottom: 20px;">目标用户：<span style="color: #ffa400;">核心用户的专项提升</span></p>
+            </div>
+            <div class="list" style="margin-top: 40px;">
+                <div class="list-item" style="font-size: 24px;">📖 系统课程（199元）</div>
+                <div class="list-item" style="font-size: 24px;">🎓 训练营（499元）</div>
+                <div class="list-item" style="font-size: 24px;">🚀 进阶课程（999元）</div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(102, 126, 234, 0.15); padding: 35px; border-radius: 12px;">
+                <h4 style="font-size: 28px; color: #667eea; margin-bottom: 20px;">提供价值：</h4>
+                <div class="list">
+                    <div class="list-item">有体系的方法论</div>
+                    <div class="list-item">有方案的落地路径</div>
+                    <div class="list-item">有案例的实战拆解</div>
+                </div>
+            </div>
+            <div class="slide-number">43 / 71</div>
+        </div>
+
+        <!-- 第44页：第3层高阶服务 -->
+        <div class="slide">
+            <h3>第3层：高阶服务</h3>
+            <h2 style="margin: 40px 0; color: #ffa400;">定价：<span style="font-size: 52px;">1999元 - 9999元+</span></h2>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item" style="font-size: 26px;">👤 一对一指导</div>
+                <div class="list-item" style="font-size: 26px;">👥 高价值社群</div>
+                <div class="list-item" style="font-size: 26px;">🎯 定制化服务</div>
+                <div class="list-item" style="font-size: 26px;">🤝 深度陪跑</div>
+                <div class="list-item" style="font-size: 26px;">💼 合作项目</div>
+            </div>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 34px; line-height: 1.6;">💰 利润主阵地<br>🏆 超出预期的深度服务<br>🔄 长期陪伴和持续支持</h2>
+            </div>
+            <div class="slide-number">44 / 71</div>
+        </div>
+
+        <!-- 继续第45-64页... -->
+        
+        
+        <!-- 第45页：三层对比表 -->
+        <div class="slide">
+            <h3>三层对比总结</h3>
+            <div style="margin: 60px auto; max-width: 1000px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 22px;">
+                    <thead>
+                        <tr style="background: rgba(255, 164, 0, 0.2);">
+                            <th style="padding: 20px; border: 2px solid #ffa400;">层级</th>
+                            <th style="padding: 20px; border: 2px solid #ffa400;">价格</th>
+                            <th style="padding: 20px; border: 2px solid #ffa400;">目的</th>
+                            <th style="padding: 20px; border: 2px solid #ffa400;">利润占比</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">低价课</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">19-99</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">引流</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center; color: #b8b8b8;">10%</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">中阶课</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">199-999</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">信任</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center; color: #ffa400;">30%</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">高阶服务</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">1999+</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center;">利润</td>
+                            <td style="padding: 20px; border: 2px solid #667eea; text-align: center; color: #00d9a3; font-size: 28px; font-weight: 700;">60%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="quote-box" style="margin-top: 60px;">
+                <p style="text-align: center; font-size: 32px; font-weight: 700;">三层结合 = 打破天花板 + 长期复利 + 用户粘性</p>
+            </div>
+            <div class="slide-number">45 / 71</div>
+        </div>
+
+        <!-- 继续补充第46-64页代码... -->
+                <!-- 第46页：写作课学员案例 -->
+        <div class="slide">
+            <h3>真实案例：写作课学员</h3>
+            <div class="comparison">
+                <div class="comparison-item" style="background: rgba(184, 184, 184, 0.1); border: 2px solid #b8b8b8;">
+                    <h4 style="font-size: 26px; color: #b8b8b8; margin-bottom: 20px;">Before</h4>
+                    <p style="font-size: 20px; text-align: left; line-height: 1.8;">
+                        只有1个产品：<br>
+                        499元系统课<br><br>
+                        月销量：几十份<br>
+                        <span style="color: #ff6b6b; font-size: 24px; font-weight: 700;">月收入：2-3万</span>
+                    </p>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 26px; color: #00d9a3; margin-bottom: 20px;">After</h4>
+                    <p style="font-size: 20px; text-align: left; line-height: 1.8;">
+                        设计三层产品：<br>
+                        19.9元 入门课<br>
+                        499元 系统课<br>
+                        2999元 私教服务<br><br>
+                        <span style="color: #00d9a3; font-size: 32px; font-weight: 700;">月收入：15万+</span>
+                    </p>
+                </div>
+            </div>
+            <div style="margin-top: 50px; text-align: center;">
+                <div class="big-number" style="font-size: 100px; color: #00d9a3;">5倍</div>
+                <h2 style="color: #00d9a3; font-size: 38px;">收入增长 ↗</h2>
+            </div>
+            <div class="quote-box" style="margin-top: 40px;">
+                <p style="text-align: center; font-size: 24px;">不同需求的用户都能找到适合的产品<br>满意度反而更高</p>
+            </div>
+            <div class="slide-number">46 / 71</div>
+        </div>
+
+        <!-- 第47页：过渡页 -->
+        <div class="slide">
+            <h2>有了分层产品，接下来...</h2>
+            <div class="big-number" style="margin: 60px 0;">🔥</div>
+            <h1 style="font-size: 52px; margin: 40px 0;">怎么做爆款内容引流？</h1>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #e94560 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 36px;">⚡ 四步法</h2>
+                <p style="font-size: 28px; margin-top: 20px;">学会了，流量会暴涨！</p>
+            </div>
+            <div class="arrow" style="font-size: 56px; margin-top: 50px; color: #ffa400;">→ 重点来了</div>
+            <div class="slide-number">47 / 71</div>
+        </div>
+
+        <!-- 第48页：什么是爆款 -->
+        <div class="slide">
+            <h2>什么是真正的爆款内容？</h2>
+            <div class="comparison" style="margin-top: 60px;">
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 28px; color: #ff6b6b; margin-bottom: 20px;">❌ 误区</h4>
+                    <p style="font-size: 24px; text-align: left;">高播放量</p>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 28px; color: #00d9a3; margin-bottom: 20px;">✅ 正确理解</h4>
+                    <div class="list">
+                        <div class="list-item" style="font-size: 20px;">能带来精准用户</div>
+                        <div class="list-item" style="font-size: 20px;">能产生转化</div>
+                        <div class="list-item" style="font-size: 20px;">能建立信任</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(255, 164, 0, 0.15); padding: 35px; border-radius: 12px;">
+                <p style="font-size: 24px; text-align: center; line-height: 1.8;">
+                    爆款内容 = 流量 × 精准度 × 转化率 × 信任度
+                </p>
+            </div>
+            <h3 style="margin-top: 50px; border: none; padding: 0; text-align: center;">目标：获取高质量用户<br>不是单纯追求播放量</h3>
+            <div class="slide-number">48 / 71</div>
+        </div>
+
+        <!-- 第49页：四步法全景 -->
+        <div class="slide">
+            <h2>爆款内容四步法</h2>
+            <div style="margin: 80px auto; max-width: 800px; position: relative;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
+                    <div style="background: rgba(102, 126, 234, 0.2); padding: 35px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #667eea; border: none; padding: 0; font-size: 32px;">第1步</h3>
+                        <p style="font-size: 26px; margin-top: 15px;">选题挖掘</p>
+                    </div>
+                    <div style="background: rgba(255, 164, 0, 0.2); padding: 35px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #ffa400; border: none; padding: 0; font-size: 32px;">第2步</h3>
+                        <p style="font-size: 26px; margin-top: 15px;">结构移植</p>
+                    </div>
+                    <div style="background: rgba(0, 217, 163, 0.2); padding: 35px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #00d9a3; border: none; padding: 0; font-size: 32px;">第3步</h3>
+                        <p style="font-size: 26px; margin-top: 15px;">观点杂交</p>
+                    </div>
+                    <div style="background: rgba(233, 69, 96, 0.2); padding: 35px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #e94560; border: none; padding: 0; font-size: 32px;">第4步</h3>
+                        <p style="font-size: 26px; margin-top: 15px;">风格再造</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 12px;">
+                <p style="font-size: 28px; text-align: center; color: #ffa400;">可复制的爆款方法论<br>每一步都有具体操作</p>
+            </div>
+            <div class="slide-number">49 / 71</div>
+        </div>
+
+        <!-- 第50页：选题挖掘三方法 -->
+        <div class="slide">
+            <h3>第1步：选题挖掘</h3>
+            <h2 style="margin: 30px 0; color: #e94560; font-size: 38px;">选题对了，成功一半！</h2>
+            <div style="margin-top: 50px;">
+                <div class="step-box">
+                    <h4>方法1：数据分析</h4>
+                    <p>📊 用户评论高频词 | 📈 搜索关键词趋势 | 💬 高频提问<br>→ 用户反复问什么 = 最大需求</p>
+                </div>
+                <div class="step-box">
+                    <h4>方法2：追踪热点</h4>
+                    <p>🔥 平台热门话题 | 📰 时事热点结合 | 🌊 顺势而为<br>→ 借势上位</p>
+                </div>
+                <div class="step-box">
+                    <h4>方法3：挖掘蓝海</h4>
+                    <p>🔍 未被满足的需求 | 🎯 小众精准市场 | 💎 避开红海<br>→ 差异化定位</p>
+                </div>
+            </div>
+            <div class="slide-number">50 / 71</div>
+        </div>
+
+        <!-- 第51页：蓝海选题案例 -->
+        <div class="slide">
+            <h3>蓝海选题的威力</h3>
+            <div class="comparison" style="margin-top: 60px;">
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 28px; color: #ff6b6b; margin-bottom: 20px;">❌ 红海选题</h4>
+                    <p style="font-size: 24px; text-align: left; line-height: 1.8;">
+                        "怎么做抖音"<br><br>
+                        竞争激烈<br>
+                        同质化严重<br><br>
+                        <span style="color: #ff6b6b; font-weight: 700;">100万内容创作者竞争</span>
+                    </p>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 28px; color: #00d9a3; margin-bottom: 20px;">✅ 蓝海选题</h4>
+                    <p style="font-size: 24px; text-align: left; line-height: 1.8;">
+                        "40岁宝妈怎么做抖音"<br><br>
+                        精准且蓝海<br>
+                        竞争小<br><br>
+                        <span style="color: #00d9a3; font-weight: 700;">只有几百个对手</span>
+                    </p>
+                </div>
+            </div>
+            <div class="quote-box" style="margin-top: 60px;">
+                <p style="text-align: center; font-size: 36px; font-weight: 700; color: #ffa400;">越精准 = 越蓝海 = 越容易出头</p>
+            </div>
+            <div class="slide-number">51 / 71</div>
+        </div>
+
+        <!-- 第52页：爆款结构公式 -->
+        <div class="slide">
+            <h3>第2步：结构移植</h3>
+            <h2 style="margin: 30px 0;">学习爆款的底层结构</h2>
+            <div style="margin: 50px auto; max-width: 900px;">
+                <div class="step-box" style="background: rgba(233, 69, 96, 0.15);">
+                    <h4>0-3秒：钩子</h4>
+                    <p>抓住注意力，制造悬念</p>
+                </div>
+                <div class="step-box" style="background: rgba(255, 164, 0, 0.15);">
+                    <h4>3-30秒：核心场景</h4>
+                    <p>制造共鸣，引发痛点</p>
+                </div>
+                <div class="step-box" style="background: rgba(102, 126, 234, 0.15);">
+                    <h4>30秒-结尾：观点升维</h4>
+                    <p>提供价值，认知升级</p>
+                </div>
+                <div class="step-box" style="background: rgba(0, 217, 163, 0.15);">
+                    <h4>结尾：行动引导</h4>
+                    <p>促进转化，引导关注</p>
+                </div>
+            </div>
+            <div style="margin-top: 50px; background: rgba(255, 107, 107, 0.15); padding: 30px; border-radius: 12px;">
+                <p style="font-size: 24px; text-align: center; color: #ff6b6b;">⚠️ 注意：不是抄袭内容，是学习结构逻辑</p>
+            </div>
+            <div class="slide-number">52 / 71</div>
+        </div>
+
+        <!-- 第53页：结构案例展示 -->
+        <div class="slide">
+            <h3>结构移植案例</h3>
+            <div class="case-box" style="margin-top: 40px;">
+                <div class="case-content">
+                    <div style="background: rgba(233, 69, 96, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="font-size: 22px; color: #e94560; margin-bottom: 10px;">【钩子】</h4>
+                        <p style="font-size: 20px;">"为什么你每天工作12小时还是穷？"<br>→ 痛点+疑问，3秒抓住</p>
+                    </div>
+                    <div style="background: rgba(255, 164, 0, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="font-size: 22px; color: #ffa400; margin-bottom: 10px;">【场景】</h4>
+                        <p style="font-size: 20px;">"早上6点起床，晚上12点睡觉，累成狗，银行卡还是3位数..."<br>→ 共鸣场景</p>
+                    </div>
+                    <div style="background: rgba(102, 126, 234, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="font-size: 22px; color: #667eea; margin-bottom: 10px;">【观点】</h4>
+                        <p style="font-size: 20px;">"因为你在用时间换钱，不是用价值换钱！"<br>→ 认知升级</p>
+                    </div>
+                    <div style="background: rgba(0, 217, 163, 0.15); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="font-size: 22px; color: #00d9a3; margin-bottom: 10px;">【引导】</h4>
+                        <p style="font-size: 20px;">"想学会用价值换钱？关注我，下期讲方法！"<br>→ 行动召唤</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">53 / 71</div>
+        </div>
+
+        <!-- 第54页：观点杂交示意图 -->
+        <div class="slide">
+            <h3>第3步：观点杂交</h3>
+            <h2 style="margin: 30px 0;">跨界组合，制造差异</h2>
+            <div style="margin: 60px auto; max-width: 700px; background: rgba(255, 164, 0, 0.1); padding: 40px; border-radius: 12px;">
+                <p style="font-size: 28px; text-align: center; line-height: 2;">
+                    领域A的观点 <span style="font-size: 40px; color: #ffa400;">+</span> 领域B的场景<br>
+                    <span style="font-size: 48px; color: #ffa400;">↓</span><br>
+                    <span style="color: #00d9a3; font-weight: 700; font-size: 32px;">全新认知冲击</span>
+                </p>
+            </div>
+            <div class="list" style="margin-top: 60px;">
+                <div class="list-item" style="font-size: 24px;">商业思维 × 个人成长</div>
+                <div class="list-item" style="font-size: 24px;">产品思维 × 婚姻经营</div>
+                <div class="list-item" style="font-size: 24px;">投资思维 × 时间管理</div>
+                <div class="list-item" style="font-size: 24px;">营销思维 × 育儿教育</div>
+            </div>
+            <div class="quote-box" style="margin-top: 50px;">
+                <p style="text-align: center; font-size: 32px; font-weight: 700;">颠覆性认知 = 差异化内容</p>
+            </div>
+            <div class="slide-number">54 / 71</div>
+        </div>
+
+        <!-- 第55页：跨界案例 -->
+        <div class="slide">
+            <h3>观点杂交实例</h3>
+            <div style="margin-top: 50px;">
+                <div class="case-box">
+                    <div class="case-title">案例1</div>
+                    <div class="case-content">
+                        <p style="font-size: 24px; color: #ffa400; font-weight: 700;">商业思维 × 个人成长</p>
+                        <p style="font-size: 22px; margin-top: 15px;">"把自己当作产品来运营"</p>
+                    </div>
+                </div>
+                <div class="case-box">
+                    <div class="case-title">案例2</div>
+                    <div class="case-content">
+                        <p style="font-size: 24px; color: #667eea; font-weight: 700;">产品经理思维 × 婚姻经营</p>
+                        <p style="font-size: 22px; margin-top: 15px;">"用迭代思维优化夫妻关系"</p>
+                    </div>
+                </div>
+                <div class="case-box">
+                    <div class="case-title">案例3</div>
+                    <div class="case-content">
+                        <p style="font-size: 24px; color: #00d9a3; font-weight: 700;">投资思维 × 时间管理</p>
+                        <p style="font-size: 22px; margin-top: 15px;">"时间就是你最大的资产配置"</p>
+                    </div>
+                </div>
+            </div>
+            <h2 style="margin-top: 60px; color: #e94560; font-size: 38px;">跨界杂交 = 认知降维打击</h2>
+            <div class="slide-number">55 / 71</div>
+        </div>
+
+        <!-- 第56页：风格的重要性 -->
+        <div class="slide">
+            <h3>第4步：风格再造</h3>
+            <h2 style="margin: 30px 0; color: #e94560; font-size: 42px;">（最关键的一步）</h2>
+            <div class="list" style="margin-top: 60px;">
+                <div class="list-item" style="font-size: 26px;">✓ 表达方式</div>
+                <div class="list-item" style="font-size: 26px;">✓ 语气语调</div>
+                <div class="list-item" style="font-size: 26px;">✓ 表情动作</div>
+                <div class="list-item" style="font-size: 26px;">✓ 视觉包装</div>
+            </div>
+            <div style="margin-top: 70px; background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 36px; line-height: 1.6;">让用户一看就知道是你！</h2>
+            </div>
+            <div class="quote-box" style="margin-top: 50px;">
+                <p style="font-size: 26px; line-height: 1.8;">
+                    风格 ≠ 装饰<br>
+                    风格 = <span style="color: #ffa400; font-weight: 700; font-size: 30px;">认知×体验×价值的放大器</span><br><br>
+                    它直接塑造粉丝的归属感
+                </p>
+            </div>
+            <div class="slide-number">56 / 71</div>
+        </div>
+
+        <!-- 第57页：三大IP案例 -->
+        <div class="slide">
+            <h3>风格的力量</h3>
+            <div style="margin-top: 50px;">
+                <div class="step-box" style="background: rgba(233, 69, 96, 0.15);">
+                    <h4>📺 papi酱</h4>
+                    <p>内容：生活吐槽 | 风格：快语速+犀利+搞笑</p>
+                </div>
+                <div class="step-box" style="background: rgba(255, 164, 0, 0.15);">
+                    <h4>🌸 李子柒</h4>
+                    <p>内容：田园生活 | 风格：唯美+慢节奏+诗意</p>
+                </div>
+                <div class="step-box" style="background: rgba(102, 126, 234, 0.15);">
+                    <h4>⚖️ 罗翔</h4>
+                    <p>内容：法律知识 | 风格：幽默+金句+接地气</p>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: rgba(0, 217, 163, 0.15); padding: 35px; border-radius: 12px;">
+                <p style="font-size: 28px; text-align: center; line-height: 1.8;">
+                    <span style="color: #00d9a3; font-weight: 700;">共同点：</span><br>
+                    内容别人也能讲<br>
+                    但<span style="color: #ffa400; font-size: 32px; font-weight: 700;">风格无人能复制</span>
+                </p>
+            </div>
+            <h2 style="margin-top: 60px; color: #e94560; font-size: 42px;">风格 = 不可替代性</h2>
+            <div class="slide-number">57 / 71</div>
+        </div>
+
+        <!-- 第58页：同质化现象 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 60px;">你发现了吗？</h2>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item cross" style="font-size: 28px;">🔄 内容越来越像</div>
+                <div class="list-item cross" style="font-size: 28px;">🔄 话术越来越像</div>
+                <div class="list-item cross" style="font-size: 28px;">🔄 套路越来越像</div>
+            </div>
+            <div class="arrow" style="font-size: 56px; margin: 60px 0; color: #ff6b6b;">↓</div>
+            <div style="background: rgba(255, 107, 107, 0.2); padding: 40px; border-radius: 12px;">
+                <h2 style="color: #ff6b6b; font-size: 38px; line-height: 1.6;">
+                    💀 同质化严重<br>
+                    💀 价格战<br>
+                    💀 卷到死<br>
+                    💀 谁都赚不到钱
+                </h2>
+            </div>
+            <h2 style="margin-top: 60px; font-size: 42px; color: #e94560;">⚠️ 这是所有创业者的噩梦</h2>
+            <div class="slide-number">58 / 71</div>
+        </div>
+
+        <!-- 第59页：差异化vs同质化对比 -->
+        <div class="slide">
+            <h2>差异化 vs 同质化</h2>
+            <div class="comparison" style="margin-top: 60px;">
+                <div class="comparison-item bad">
+                    <h4 style="font-size: 28px; color: #ff6b6b; margin-bottom: 25px;">同质化</h4>
+                    <div class="list">
+                        <div class="list-item cross">产品可以被模仿</div>
+                        <div class="list-item cross">功能可以被复制</div>
+                        <div class="list-item cross">价格可以被打穿</div>
+                        <div class="list-item cross">陷入恶性竞争</div>
+                    </div>
+                    <h3 style="margin-top: 30px; color: #ff6b6b; border: none; padding: 0; text-align: center; font-size: 32px;">→ 死路一条</h3>
+                </div>
+                <div class="comparison-item good">
+                    <h4 style="font-size: 28px; color: #00d9a3; margin-bottom: 25px;">差异化</h4>
+                    <div class="list">
+                        <div class="list-item">风格无法抄袭</div>
+                        <div class="list-item">精神气质独特</div>
+                        <div class="list-item">用户认同你这个人</div>
+                        <div class="list-item">建立护城河</div>
+                    </div>
+                    <h3 style="margin-top: 30px; color: #00d9a3; border: none; padding: 0; text-align: center; font-size: 32px;">→ 长期制胜</h3>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 42px;">差异化风格 = 唯一活路</h2>
+            </div>
+            <div class="slide-number">59 / 71</div>
+        </div>
+
+        <!-- 第60页：差异化风格的力量 -->
+        <div class="slide">
+            <h3>打造差异化风格</h3>
+            <div style="margin-top: 50px;">
+                <p style="font-size: 26px; margin-bottom: 30px;">你可以是：</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                    <div style="background: rgba(233, 69, 96, 0.15); padding: 25px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">🔥</div>
+                        <p style="font-size: 22px;">叛逆的</p>
+                    </div>
+                    <div style="background: rgba(255, 164, 0, 0.15); padding: 25px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">⚡</div>
+                        <p style="font-size: 22px;">先锋的</p>
+                    </div>
+                    <div style="background: rgba(255, 182, 193, 0.15); padding: 25px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">🌸</div>
+                        <p style="font-size: 22px;">温暖的</p>
+                    </div>
+                    <div style="background: rgba(102, 126, 234, 0.15); padding: 25px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">💪</div>
+                        <p style="font-size: 22px;">硬核的</p>
+                    </div>
+                    <div style="background: rgba(255, 215, 0, 0.15); padding: 25px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">😄</div>
+                        <p style="font-size: 22px;">幽默的</p>
+                    </div>
+                    <div style="background: rgba(0, 217, 163, 0.15); padding: 25px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 40px; margin-bottom: 10px;">💚</div>
+                        <p style="font-size: 22px;">治愈的</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 70px; background: rgba(255, 164, 0, 0.15); padding: 40px; border-radius: 12px;">
+                <h2 style="font-size: 36px; text-align: center; line-height: 1.6;">
+                    让用户一看就知道是你<br>
+                    <span style="color: #ffa400; font-size: 42px;">不可替代！</span>
+                </h2>
+            </div>
+            <h3 style="margin-top: 50px; border: none; padding: 0; text-align: center; font-size: 30px;">风格 = IP = 标签 = 你最宝贵的商业资产</h3>
+            <div class="slide-number">60 / 71</div>
+        </div>
+
+        <!-- 第61页：风格标签云 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 60px;">你的独特风格</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: rgba(233, 69, 96, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">专业权威</div>
+                <div style="background: rgba(255, 164, 0, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">犀利直接</div>
+                <div style="background: rgba(255, 182, 193, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">温暖治愈</div>
+                <div style="background: rgba(255, 215, 0, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">幽默搞笑</div>
+                <div style="background: rgba(102, 126, 234, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">硬核实战</div>
+                <div style="background: rgba(186, 85, 211, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">优雅精致</div>
+                <div style="background: rgba(255, 69, 0, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">叛逆创新</div>
+                <div style="background: rgba(0, 217, 163, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">亲和接地</div>
+                <div style="background: rgba(75, 0, 130, 0.2); padding: 20px 35px; border-radius: 25px; font-size: 24px; font-weight: 600;">高冷精英</div>
+            </div>
+            <div style="margin-top: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px;">
+                <p style="font-size: 28px; text-align: center; line-height: 1.8;">
+                    选择最符合你的<br>
+                    <span style="font-size: 36px; font-weight: 700;">强化它、放大它、标签化它</span>
+                </p>
+            </div>
+            <div class="slide-number">61 / 71</div>
+        </div>
+
+        <!-- 第62页：10%竞争力策略 -->
+        <div class="slide">
+            <h2>保留10%核心竞争力</h2>
+            <div style="margin: 60px auto; max-width: 800px; background: rgba(255, 164, 0, 0.15); padding: 40px; border-radius: 12px;">
+                <p style="font-size: 26px; text-align: center; line-height: 1.8;">
+                    无论信息多么开放透明<br>
+                    都必须保留一部分<br>
+                    <span style="color: #ffa400; font-size: 34px; font-weight: 700;">只属于你的核心竞争力</span>
+                </p>
+            </div>
+            <div class="list" style="margin-top: 60px;">
+                <div class="list-item" style="font-size: 24px; color: #ff6b6b;">⚠️ 全部输出 = 被复制超越</div>
+                <div class="list-item" style="font-size: 24px; color: #ff6b6b;">⚠️ 同质化 = 卷死</div>
+                <div class="list-item" style="font-size: 24px; color: #ff6b6b;">⚠️ 失去差异 = 失去价值</div>
+            </div>
+            <div style="margin-top: 60px; text-align: center;">
+                <div style="display: inline-block; position: relative; width: 300px; height: 300px;">
+                    <svg width="300" height="300" style="transform: rotate(-90deg);">
+                        <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(0, 217, 163, 0.3)" stroke-width="40"/>
+                        <circle cx="150" cy="150" r="120" fill="none" stroke="#00d9a3" stroke-width="40" stroke-dasharray="678" stroke-dashoffset="68"/>
+                    </svg>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                        <div style="font-size: 72px; font-weight: 700; color: #ffa400;">10%</div>
+                        <div style="font-size: 20px; color: #e0e0e0; margin-top: 10px;">保留</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">62 / 71</div>
+        </div>
+
+        <!-- 第63页：三个保留方法 -->
+        <div class="slide">
+            <h3>如何保留10%？</h3>
+            <div style="margin-top: 50px;">
+                <div class="step-box">
+                    <h4>方法1：🔐 独家内容分级</h4>
+                    <p>最新案例、新工具、独家方法<br>只给核心用户和付费用户</p>
+                </div>
+                <div class="step-box">
+                    <h4>方法2：🎨 打磨个人风格</h4>
+                    <p>不断优化表达方式<br>成为唯一的、难以替代的IP</p>
+                </div>
+                <div class="step-box">
+                    <h4>方法3：👥 建立深度关系</h4>
+                    <p>独特的社群生态 + 长期信任关系<br>让用户对你这个人买单</p>
+                </div>
+            </div>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px;">
+                <p style="font-size: 32px; text-align: center; line-height: 1.6;">
+                    商业的安全感 =<br>
+                    <span style="font-size: 40px; font-weight: 700;">不可替代性 + 剩余价值</span>
+                </p>
+            </div>
+            <div class="slide-number">63 / 71</div>
+        </div>
+
+        <!-- 第64页：不可替代性金句 -->
+        <div class="slide">
+            <div style="margin: 100px 0;">
+                <h1 style="font-size: 56px; line-height: 1.5; text-align: center;">
+                    商业的终极竞争
+                </h1>
+                <div style="margin: 60px 0;">
+                    <h2 style="font-size: 42px; color: #b8b8b8; text-align: center; margin: 20px 0;">不是价格</h2>
+                    <h2 style="font-size: 42px; color: #b8b8b8; text-align: center; margin: 20px 0;">不是流量</h2>
+                </div>
+                <div style="margin: 80px 0;">
+                    <h1 style="font-size: 64px; text-align: center; margin: 30px 0;">而是</h1>
+                    <div style="background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 50px; border-radius: 12px; margin: 40px auto; max-width: 800px;">
+                        <h1 style="font-size: 56px; text-align: center; text-shadow: 0 0 30px rgba(255, 164, 0, 0.5);">
+                            你的不可替代性
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">64 / 71</div>
+        </div>
+
+        <!-- 第65页：核心回顾 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 40px;">25分钟，你学到了什么？</h2>
+            <div class="list" style="margin-top: 40px;">
+                <div class="list-item" style="font-size: 22px;">商业本质 - 交换的是信息和信任</div>
+                <div class="list-item" style="font-size: 22px;">成交三要素 - 需求+信任+购买力</div>
+                <div class="list-item" style="font-size: 22px;">商业四步路径 - 被看见→被认可→被需要→被依赖</div>
+                <div class="list-item" style="font-size: 22px;">付费心理 - 从免费到风格体验的四阶段</div>
+                <div class="list-item" style="font-size: 22px;">分层变现 - 同一产品卖3个价位</div>
+                <div class="list-item" style="font-size: 22px;">爆款内容 - 选题-结构-观点-风格</div>
+                <div class="list-item" style="font-size: 22px;">终极武器 - 差异化风格+10%竞争力</div>
+            </div>
+            <div class="slide-number">65 / 71</div>
+        </div>
+
+        <!-- 第66页：行动建议 -->
+        <div class="slide">
+            <h2>现在，你可以做这3件事</h2>
+            <div style="margin-top: 60px;">
+                <div class="step-box">
+                    <h4>行动1：用四步路径自检</h4>
+                    <p>问自己：我在哪一步？下一步该做什么？</p>
+                </div>
+                <div class="step-box">
+                    <h4>行动2：设计分层产品</h4>
+                    <p>低价引流、中阶建立信任、高阶服务变现</p>
+                </div>
+                <div class="step-box">
+                    <h4>行动3：打造差异化风格</h4>
+                    <p>让用户一看就知道是你</p>
+                </div>
+            </div>
+            <p style="margin-top: 50px; font-size: 26px; color: #ffa400;">听完课不是结束，是开始！</p>
+            <div class="slide-number">66 / 71</div>
+        </div>
+
+        <!-- 第67页：资料包介绍 -->
+        <div class="slide">
+            <h1 style="font-size: 48px; margin-bottom: 40px;">🎁 限时福利</h1>
+            <h2>《商业操作系统实战手册》</h2>
+            <div class="list" style="margin-top: 50px;">
+                <div class="list-item">📋 成交三要素自检表</div>
+                <div class="list-item">🎯 四步路径诊断工具</div>
+                <div class="list-item">💰 分层产品设计模板</div>
+                <div class="list-item">🔥 爆款选题库（100+）</div>
+                <div class="list-item">🎨 风格定位画布</div>
+            </div>
+            <div style="margin-top: 50px; background: rgba(233, 69, 96, 0.2); padding: 30px; border-radius: 12px;">
+                <p style="font-size: 28px;"><span style="text-decoration: line-through; color: #b8b8b8;">单独购买：199元</span></p>
+                <h2 style="color: #00d9a3; margin-top: 20px; font-size: 42px;">现在免费领取！</h2>
+            </div>
+            <div class="slide-number">67 / 71</div>
+        </div>
+
+        <!-- 第68页：二维码 -->
+        <div class="slide">
+            <div class="qr-code">
+                [二维码位置]<br>扫码领取
+            </div>
+            <h2 style="margin-top: 40px;">👇 长按识别二维码 👇</h2>
+            <p style="margin-top: 30px; font-size: 24px; color: #e94560;">限时免费，先到先得</p>
+            <div class="slide-number">68 / 71</div>
+        </div>
+
+        <!-- 第69页：训练营介绍 -->
+        <div class="slide">
+            <h2 style="margin-bottom: 30px;">想要更系统的学习？</h2>
+            <h1 style="font-size: 42px; color: #ffa400; margin-bottom: 50px;">《0-1商业实战训练营》</h1>
+            <div class="list">
+                <div class="list-item">21天系统课程</div>
+                <div class="list-item">手把手实战陪跑</div>
+                <div class="list-item">一对一作业点评</div>
+                <div class="list-item">专属社群答疑</div>
+                <div class="list-item">真实案例拆解</div>
+            </div>
+            <div style="margin-top: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 35px; border-radius: 12px;">
+                <h2 style="font-size: 32px;">帮你少走3年弯路<br>从0到1打造商业闭环</h2>
+            </div>
+            <div class="slide-number">69 / 71</div>
+        </div>
+
+        <!-- 第70页：结尾金句 -->
+        <div class="slide">
+            <h1 style="font-size: 42px; line-height: 1.6; margin-bottom: 60px;">商业的终极竞争<br>是认知、信任和不可替代性</h1>
+            <div class="arrow" style="font-size: 60px;">↓</div>
+            <h2 style="margin: 60px 0; font-size: 36px; line-height: 1.6;">愿你用这套商业操作系统<br>打造属于你的商业护城河</h2>
+            <h2 style="color: #ffa400; font-size: 38px; margin-top: 50px;">穿越周期，屹立不倒</h2>
+            <p style="margin-top: 80px; font-size: 28px;">我们，实战中见！</p>
+            <p style="margin-top: 30px; font-size: 20px; color: #b8b8b8;">- 徐课长 -</p>
+            <div class="slide-number">70 / 71</div>
+        </div>
+
+        <!-- 第71页：片尾 -->
+        <div class="slide">
+            <h1 style="margin-bottom: 60px;">感谢观看</h1>
+            <h2 style="margin-bottom: 40px; font-size: 32px;">徐课长商业课</h2>
+            <p style="font-size: 22px; margin-bottom: 60px;">专注职场认知升级 | 助你突破职业瓶颈</p>
+            <div style="margin: 60px 0;">
+                <p style="font-size: 28px;">👍 点赞 | 🔖 收藏 | 📤 分享</p>
+            </div>
+            <div class="qr-code">
+    <img src="您的二维码图片.png" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+            <p style="margin-top: 40px; font-size: 18px; color: #b8b8b8;">#商业认知 #创业思维 #副业赚钱</p>
+            <div class="slide-number">71 / 71</div>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="previousSlide()">← 上一页</button>
+        <button class="control-btn" onclick="nextSlide()">下一页 →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progressBar');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            updateProgress();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        // 键盘控制
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // 触摸滑动支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                previousSlide();
+            }
+        }
+
+        // 初始化
+        updateProgress();
+    </script>
+</body>
+</html>
