@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐课长 | AI超级个体教练 - AI商业哲思</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #00ff88;
+            --primary-dark: #00cc6a;
+            --bg-dark: #0a0a0f;
+            --bg-card: #0d0d12;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #444444;
+            --border-subtle: rgba(255,255,255,0.05);
+            --glow-primary: rgba(0,255,136,0.15);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-dark);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 流动水印背景 */
+        .watermark-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .watermark-layer {
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+            animation: floatWatermark 60s linear infinite;
+        }
+        
+        .watermark-layer.reverse {
+            animation: floatWatermarkReverse 80s linear infinite;
+            opacity: 0.3;
+        }
+        
+        .watermark-item {
+            color: rgba(255,255,255,0.02);
+            font-size: 12px;
+            white-space: nowrap;
+            transform: rotate(-15deg);
+            padding: 40px 60px;
+            letter-spacing: 1px;
+            user-select: none;
+        }
+        
+        .watermark-item.highlight {
+            color: rgba(0,255,136,0.03);
+        }
+        
+        @keyframes floatWatermark {
+            0% { transform: translate(0, 0) rotate(-15deg); }
+            25% { transform: translate(-5%, 3%) rotate(-14deg); }
+            50% { transform: translate(-3%, -2%) rotate(-16deg); }
+            75% { transform: translate(2%, 4%) rotate(-14deg); }
+            100% { transform: translate(0, 0) rotate(-15deg); }
+        }
+        
+        @keyframes floatWatermarkReverse {
+            0% { transform: translate(0, 0) rotate(15deg); }
+            25% { transform: translate(3%, -2%) rotate(16deg); }
+            50% { transform: translate(-2%, 4%) rotate(14deg); }
+            75% { transform: translate(-4%, -3%) rotate(16deg); }
+            100% { transform: translate(0, 0) rotate(15deg); }
+        }
+        
+        /* 智慧光粒子效果 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s ease-in-out infinite;
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 0.5s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 2.5s; }
+        
+        @keyframes particleFloat {
+            0% { 
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% { 
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 440px;
+            width: 100%;
+            background: var(--bg-card);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 100px rgba(0,255,136,0.08),
+                0 25px 80px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 顶部光效 */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        /* 头部英雄区 */
+        .hero {
+            padding: 55px 35px 45px;
+            text-align: center;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(0,255,136,0.12) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(0,255,136,0.05) 0%, transparent 100%);
+            overflow: hidden;
+        }
+        
+        /* 智慧光环 */
+        .wisdom-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            border: 1px solid rgba(0,255,136,0.1);
+            border-radius: 50%;
+            animation: ringPulse 4s ease-in-out infinite;
+        }
+        
+        .wisdom-ring:nth-child(2) {
+            width: 350px;
+            height: 350px;
+            animation-delay: 1s;
+            opacity: 0.5;
+        }
+        
+        .wisdom-ring:nth-child(3) {
+            width: 420px;
+            height: 420px;
+            animation-delay: 2s;
+            opacity: 0.3;
+        }
+        
+        @keyframes ringPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+        
+        .avatar {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            margin: 0 auto 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            position: relative;
+            z-index: 5;
+            box-shadow: 
+                0 15px 50px rgba(0,255,136,0.35),
+                0 0 0 8px rgba(0,255,136,0.1),
+                0 0 0 16px rgba(0,255,136,0.05);
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 
+                0 15px 50px rgba(0,255,136,0.35),
+                0 0 0 8px rgba(0,255,136,0.1),
+                0 0 0 16px rgba(0,255,136,0.05);
+            }
+            50% { box-shadow: 
+                0 20px 60px rgba(0,255,136,0.45),
+                0 0 0 12px rgba(0,255,136,0.15),
+                0 0 0 24px rgba(0,255,136,0.08);
+            }
+        }
+        
+        .brand-name {
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: 8px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 5;
+            text-shadow: 0 0 40px rgba(0,255,136,0.3);
+        }
+        
+        .brand-title {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #000;
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 8px 25px rgba(0,255,136,0.25);
+        }
+        
+        .brand-slogan {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 2;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .brand-slogan strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* 哲思区 */
+        .philosophy {
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(0,255,136,0.03) 0%, transparent 100%);
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+        }
+        
+        .philosophy-quote {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(0,255,136,0.1);
+            position: relative;
+        }
+        
+        .philosophy-quote::before,
+        .philosophy-quote::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(0,255,136,0.2);
+        }
+        
+        .philosophy-quote::before {
+            top: -1px;
+            left: -1px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 16px 0 0 0;
+        }
+        
+        .philosophy-quote::after {
+            bottom: -1px;
+            right: -1px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 16px 0;
+        }
+        
+        .philosophy-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .philosophy-text {
+            font-size: 16px;
+            color: #bbb;
+            line-height: 1.9;
+            font-style: italic;
+        }
+        
+        .philosophy-text strong {
+            color: var(--primary);
+            font-style: normal;
+        }
+        
+        /* 定位区 */
+        .positioning {
+            padding: 40px 35px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        
+        .label-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(0,255,136,0.15) 0%, rgba(0,255,136,0.05) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .label-text {
+            font-size: 13px;
+            color: var(--primary);
+            letter-spacing: 4px;
+            font-weight: 600;
+        }
+        
+        .positioning-box {
+            background: 
+                linear-gradient(135deg, rgba(0,255,136,0.08) 0%, rgba(0,255,136,0.02) 100%);
+            border: 1px solid rgba(0,255,136,0.15);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .positioning-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .positioning-main {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            letter-spacing: 2px;
+        }
+        
+        .positioning-sub {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* 金句区 */
+        .quotes {
+            padding: 40px 35px;
+            border-top: 1px solid var(--border-subtle);
+            background: 
+                linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+        }
+        
+        .quote-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .quote-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 20px;
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border-radius: 14px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quote-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,255,136,0.08), transparent);
+            transition: width 0.4s ease;
+        }
+        
+        .quote-item:hover {
+            transform: translateX(8px);
+            border-left-width: 5px;
+        }
+        
+        .quote-item:hover::before {
+            width: 100%;
+        }
+        
+        .quote-num {
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-text {
+            font-size: 14px;
+            color: #bbb;
+            line-height: 1.8;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-text strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* 三大支柱 */
+        .pillars {
+            padding: 40px 35px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .pillars-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .pillar-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px;
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.005) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pillar-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,255,136,0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .pillar-item:hover {
+            border-color: rgba(0,255,136,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,255,136,0.1);
+        }
+        
+        .pillar-item:hover::after {
+            opacity: 1;
+        }
+        
+        .pillar-icon {
+            width: 56px;
+            height: 56px;
+            background: 
+                linear-gradient(135deg, rgba(0,255,136,0.2) 0%, rgba(0,255,136,0.05) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pillar-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pillar-content h3 {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        
+        .pillar-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .pillar-arrow {
+            color: var(--primary);
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .pillar-item:hover .pillar-arrow {
+            transform: translateX(5px);
+        }
+        
+        /* 转变路径 */
+        .transformation {
+            padding: 40px 35px;
+            border-top: 1px solid var(--border-subtle);
+            background: 
+                linear-gradient(180deg, rgba(0,255,136,0.02) 0%, transparent 100%);
+        }
+        
+        .transform-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            position: relative;
+        }
+        
+        .transform-flow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--text-muted), 
+                var(--primary), 
+                var(--primary));
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        
+        .transform-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .transform-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 22px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .transform-step.active .transform-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 10px 30px rgba(0,255,136,0.3);
+        }
+        
+        .transform-step:hover .transform-icon {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .transform-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+        
+        .transform-step.active .transform-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* 顺口溜区 */
+        .slogan {
+            padding: 40px 35px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .slogan-box {
+            background: 
+                linear-gradient(135deg, #111118 0%, #0d0d12 100%);
+            border: 2px solid rgba(0,255,136,0.25);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slogan-box::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            font-size: 100px;
+            color: rgba(0,255,136,0.08);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .slogan-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .slogan-main {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 30px rgba(0,255,136,0.3);
+        }
+        
+        .slogan-sub {
+            font-size: 18px;
+            color: var(--text-primary);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 服务标签 */
+        .services {
+            padding: 30px 35px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .service-tag {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 30px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .service-tag:hover {
+            border-color: rgba(0,255,136,0.3);
+            color: var(--primary);
+            background: rgba(0,255,136,0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* 联系方式 */
+        .contact {
+            padding: 35px;
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(0,0,0,0.2);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            border-color: rgba(0,255,136,0.2);
+            background: rgba(0,255,136,0.03);
+        }
+        
+        .contact-item.full-width {
+            grid-column: span 2;
+        }
+        
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0,255,136,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .contact-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+            letter-spacing: 1px;
+        }
+        
+        .contact-value {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* CTA按钮区域 */
+        .cta {
+            padding: 35px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 28px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cta-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #000;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 20px 50px rgba(0,255,136,0.4),
+                0 0 0 3px rgba(0,255,136,0.2);
+        }
+        
+        .cta-secondary {
+            background: rgba(255,255,255,0.03);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        
+        .cta-icon {
+            font-size: 18px;
+        }
+        
+        .cta-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+        
+        /* 二维码弹窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(0,255,136,0.2);
+            box-shadow: 0 25px 80px rgba(0,255,136,0.15);
+            animation: modalIn 0.3s ease;
+        }
+        
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+        }
+        
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        
+        .modal-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .modal-desc strong {
+            color: var(--primary);
+        }
+        
+        /* 二维码占位 */
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            border-radius: 16px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qr-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+        
+        .qr-placeholder-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .qr-placeholder-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .modal-tip {
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 12px;
+            background: rgba(0,255,136,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0,255,136,0.1);
+        }
+        
+        .modal-tip strong {
+            color: var(--primary);
+        }
+        
+        /* 公众号弹窗特殊样式 */
+        .modal-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .modal-input-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+        
+        .modal-keyword {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin: 15px 0;
+        }
+        
+        .modal-steps {
+            text-align: left;
+            padding: 15px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .modal-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .modal-step-num {
+            width: 22px;
+            height: 22px;
+            background: rgba(0,255,136,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        /* 底部 */
+        .footer {
+            padding: 30px 35px;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .footer-brand {
+            font-size: 14px;
+            color: var(--primary);
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .footer-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: rgba(0,255,136,0.15);
+            border-color: rgba(0,255,136,0.3);
+            transform: translateY(-4px) scale(1.1);
+        }
+        
+        /* 版权水印 */
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .copyright-text {
+            font-size: 10px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            letter-spacing: 1px;
+        }
+        
+        /* 装饰分隔线 */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.4), transparent);
+            margin: 0 35px;
+        }
+        
+        /* 响应式适配 */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .hero {
+                padding: 45px 25px 35px;
+            }
+            
+            .brand-name {
+                font-size: 32px;
+                letter-spacing: 6px;
+            }
+            
+            .positioning,
+            .quotes,
+            .pillars,
+            .transformation,
+            .slogan,
+            .services,
+            .contact,
+            .cta,
+            .footer {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-item.full-width {
+                grid-column: span 1;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 流动水印背景 -->
+    <div class="watermark-container">
+        <div class="watermark-layer">
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+            <span class="watermark-item">微信公众号：徐课长</span>
+            <span class="watermark-item highlight">微信号：XKZ201202</span>
+            <span class="watermark-item">手机号：13683520302</span>
+            <span class="watermark-item highlight">徐课长AI数字资产商业运营</span>
+        </div>
+        <div class="watermark-layer reverse">
+            <span class="watermark-item highlight">AI超级个体教练</span>
+            <span class="watermark-item">数字资产自由</span>
+            <span class="watermark-item highlight">一人公司</span>
+            <span class="watermark-item">AI商业哲思</span>
+            <span class="watermark-item highlight">AI超级个体教练</span>
+            <span class="watermark-item">数字资产自由</span>
+            <span class="watermark-item highlight">一人公司</span>
+            <span class="watermark-item">AI商业哲思</span>
+            <span class="watermark-item highlight">AI超级个体教练</span>
+            <span class="watermark-item">数字资产自由</span>
+            <span class="watermark-item highlight">一人公司</span>
+            <span class="watermark-item">AI商业哲思</span>
+            <span class="watermark-item highlight">AI超级个体教练</span>
+            <span class="watermark-item">数字资产自由</span>
+            <span class="watermark-item highlight">一人公司</span>
+            <span class="watermark-item">AI商业哲思</span>
+        </div>
+    </div>
+    
+    <!-- 智慧光粒子 -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 头部英雄区 -->
+        <div class="hero">
+            <div class="wisdom-ring"></div>
+            <div class="wisdom-ring"></div>
+            <div class="wisdom-ring"></div>
+            <div class="avatar">🧠</div>
+            <h1 class="brand-name">徐课长</h1>
+            <div class="brand-title">AI超级个体教练</div>
+            <p class="brand-slogan">
+                帮助普通人用<strong>AI</strong>打造<strong>一人公司</strong><br>
+                实现<strong>数字资产自由</strong>
+            </p>
+        </div>
+        
+        <!-- 哲思区 -->
+        <div class="philosophy">
+            <div class="philosophy-quote">
+                <div class="philosophy-icon">💡</div>
+                <p class="philosophy-text">
+                    <strong>AI不会取代你</strong>，但会用AI的人会取代你<br>
+                    普通人最好的翻身机会：<strong>AI + 一人公司</strong>
+                </p>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- 一句话定位 -->
+        <div class="positioning">
+            <div class="section-label">
+                <div class="label-icon">🎯</div>
+                <span class="label-text">核心定位</span>
+            </div>
+            <div class="positioning-box">
+                <p class="positioning-main">AI赋能数字资产<br>商业思维系统</p>
+                <p class="positioning-sub">让普通人通过AI赋能<br>成为超级个体的一人公司</p>
+            </div>
+        </div>
+        
+        <!-- 核心金句 -->
+        <div class="quotes">
+            <div class="section-label">
+                <div class="label-icon">💎</div>
+                <span class="label-text">核心金句</span>
+            </div>
+            <div class="quote-list">
+                <div class="quote-item">
+                    <span class="quote-num">1</span>
+                    <p class="quote-text">别打工了，<strong>用AI给自己打工</strong></p>
+                </div>
+                <div class="quote-item">
+                    <span class="quote-num">2</span>
+                    <p class="quote-text">你的经验 × AI = <strong>可售卖的数字资产</strong></p>
+                </div>
+                <div class="quote-item">
+                    <span class="quote-num">3</span>
+                    <p class="quote-text"><strong>一个人 + AI</strong> = 一支团队的战斗力</p>
+                </div>
+                <div class="quote-item">
+                    <span class="quote-num">4</span>
+                    <p class="quote-text">用AI把你的一份时间，<strong>复制成一万份收入</strong></p>
+                </div>
+                <div class="quote-item">
+                    <span class="quote-num">5</span>
+                    <p class="quote-text">从打工人到超级个体，<strong>只差一个AI系统</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 三大支柱 -->
+        <div class="pillars">
+            <div class="section-label">
+                <div class="label-icon">🏛️</div>
+                <span class="label-text">三大支柱</span>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-item">
+                    <div class="pillar-icon">🧠</div>
+                    <div class="pillar-content">
+                        <h3>AI商业思维模型</h3>
+                        <p>解决"想不通"的问题</p>
+                    </div>
+                    <span class="pillar-arrow">→</span>
+                </div>
+                <div class="pillar-item">
+                    <div class="pillar-icon">📦</div>
+                    <div class="pillar-content">
+                        <h3>AI数字产品设计</h3>
+                        <p>解决"做不出"的问题</p>
+                    </div>
+                    <span class="pillar-arrow">→</span>
+                </div>
+                <div class="pillar-item">
+                    <div class="pillar-icon">💰</div>
+                    <div class="pillar-content">
+                        <h3>AI资产变现运营</h3>
+                        <p>解决"卖不掉"的问题</p>
+                    </div>
+                    <span class="pillar-arrow">→</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 转变路径 -->
+        <div class="transformation">
+            <div class="section-label">
+                <div class="label-icon">🚀</div>
+                <span class="label-text">蜕变路径</span>
+            </div>
+            <div class="transform-flow">
+                <div class="transform-step">
+                    <div class="transform-icon">😰</div>
+                    <span class="transform-label">打工人</span>
+                </div>
+                <div class="transform-step">
+                    <div class="transform-icon">💪</div>
+                    <span class="transform-label">超级个体</span>
+                </div>
+                <div class="transform-step">
+                    <div class="transform-icon">🏢</div>
+                    <span class="transform-label">一人公司</span>
+                </div>
+                <div class="transform-step active">
+                    <div class="transform-icon">✨</div>
+                    <span class="transform-label">资产自由</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- 传播顺口溜 -->
+        <div class="slogan">
+            <div class="section-label">
+                <div class="label-icon">🔥</div>
+                <span class="label-text">口碑传播</span>
+            </div>
+            <div class="slogan-box">
+                <p class="slogan-main">学AI，找徐课长</p>
+                <p class="slogan-sub">一人公司，躺赢不慌</p>
+            </div>
+        </div>
+        
+        <!-- 服务标签 -->
+        <div class="services">
+            <div class="service-tags">
+                <span class="service-tag">AI商业思维模型</span>
+                <span class="service-tag">AI虚拟产品设计</span>
+                <span class="service-tag">AI电商运营</span>
+                <span class="service-tag">超级个体孵化</span>
+                <span class="service-tag">数字资产变现</span>
+            </div>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="contact">
+            <div class="section-label">
+                <div class="label-icon">📱</div>
+                <span class="label-text">联系方式</span>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📢</div>
+                    <div class="contact-info">
+                        <p class="contact-label">微信公众号</p>
+                        <p class="contact-value">徐课长</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div class="contact-info">
+                        <p class="contact-label">微信号</p>
+                        <p class="contact-value">XKZ201202</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-info">
+                        <p class="contact-label">手机号</p>
+                        <p class="contact-value">13683520302</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-info">
+                        <p class="contact-label">品牌</p>
+                        <p class="contact-value">AI数字资产商业运营</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA按钮 -->
+        <div class="cta">
+            <div class="cta-buttons">
+                <a href="javascript:void(0)" class="cta-btn cta-primary" onclick="openGzhModal()">
+                    <span class="cta-icon">🎁</span>
+                    领取《AI一人公司启动指南》
+                </a>
+                <p class="cta-hint">👆 关注公众号，回复关键词即可领取</p>
+                
+                <a href="javascript:void(0)" class="cta-btn cta-secondary" onclick="openWechatModal()">
+                    <span class="cta-icon">💬</span>
+                    加入AI超级个体社群
+                </a>
+                <p class="cta-hint">👆 扫码添加徐课长微信，备注"社群"</p>
+            </div>
+        </div>
+        
+        <!-- 底部 -->
+        <div class="footer">
+            <p class="footer-brand">徐课长 · AI商业哲思</p>
+            <p class="footer-text">AI赋能 · 数字资产 · 超级个体 · 一人公司</p>
+            <div class="social-icons">
+                <div class="social-icon" onclick="openGzhModal()">📢</div>
+                <div class="social-icon" onclick="openWechatModal()">💬</div>
+                <div class="social-icon">🎬</div>
+                <div class="social-icon">📖</div>
+            </div>
+            <div class="copyright">
+                <p class="copyright-text">
+                    © 徐课长AI数字资产商业运营<br>
+                    微信公众号：徐课长 | 微信号：XKZ201202<br>
+                    手机号：13683520302
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 公众号弹窗 -->
+    <div class="modal-overlay" id="gzhModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeGzhModal()">×</button>
+            <div class="modal-icon">📢</div>
+            <h3 class="modal-title">关注公众号领取</h3>
+            <p class="modal-desc">
+                扫码关注<strong>「徐课长」</strong>公众号<br>
+                回复关键词即可免费领取
+            </p>
+            
+            <div class="qr-code">
+                <div class="qr-placeholder">
+                   <img src="gzh.jpg" alt="徐课长公众号二维码" style="width:100%; height:100%; object-fit:cover; border-radius:16px;">
+                </div>
+                <!-- 实际使用时替换为真实二维码图片 -->
+                <!-- <img src="your-gzh-qrcode.jpg" alt="徐课长公众号二维码"> -->
+            </div>
+            
+            <div class="modal-keyword">AI启动指南</div>
+            
+            <div class="modal-steps">
+                <div class="modal-step">
+                    <span class="modal-step-num">1</span>
+                    <span>长按识别二维码，关注「徐课长」公众号</span>
+                </div>
+                <div class="modal-step">
+                    <span class="modal-step-num">2</span>
+                    <span>在对话框回复关键词 <strong>「AI启动指南」</strong></span>
+                </div>
+                <div class="modal-step">
+                    <span class="modal-step-num">3</span>
+                    <span>系统自动发送《AI一人公司启动指南》完整版</span>
+                </div>
+            </div>
+            
+            <div class="modal-tip">
+                💡 <strong>温馨提示：</strong>关注后还可获取更多AI商业思维模型、数字资产变现干货
+            </div>
+        </div>
+    </div>
+    
+    <!-- 微信弹窗 -->
+    <div class="modal-overlay" id="wechatModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeWechatModal()">×</button>
+            <div class="modal-icon">💬</div>
+            <h3 class="modal-title">添加徐课长微信</h3>
+            <p class="modal-desc">
+                扫码添加<strong>「徐课长」</strong>微信<br>
+                备注<strong>「社群」</strong>邀请您加入AI超级个体社群
+            </p>
+            
+            <div class="qr-code">
+                <div class="qr-placeholder">
+                    <img src="wx.png" alt="徐课长微信二维码" style="width:100%; height:100%; object-fit:cover; border-radius:16px;">
+                </div>
+                <!-- 实际使用时替换为真实二维码图片 -->
+                <!-- <img src="your-wechat-qrcode.jpg" alt="徐课长微信二维码"> -->
+            </div>
+            
+            <div class="modal-steps">
+                <div class="modal-step">
+                    <span class="modal-step-num">1</span>
+                    <span>长按识别二维码，添加徐课长微信</span>
+                </div>
+                <div class="modal-step">
+                    <span class="modal-step-num">2</span>
+                    <span>添加好友时备注 <strong>「社群」</strong></span>
+                </div>
+                <div class="modal-step">
+                    <span class="modal-step-num">3</span>
+                    <span>通过后邀请您加入AI超级个体私域社群</span>
+                </div>
+            </div>
+            
+            <div class="modal-tip">
+                🎯 <strong>社群福利：</strong>每周AI商业案例拆解、思维模型分享、一对一答疑
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 公众号弹窗控制
+        function openGzhModal() {
+            document.getElementById('gzhModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeGzhModal() {
+            document.getElementById('gzhModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 微信弹窗控制
+        function openWechatModal() {
+            document.getElementById('wechatModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeWechatModal() {
+            document.getElementById('wechatModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 点击弹窗外部关闭
+        document.getElementById('gzhModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGzhModal();
+            }
+        });
+        
+        document.getElementById('wechatModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeWechatModal();
+            }
+        });
+        
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeGzhModal();
+                closeWechatModal();
+            }
+        });
+    </script>
+</body>
+</html>
