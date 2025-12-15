@@ -2,244 +2,236 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>徐课长 | AI数字资产构建系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>徐课长 | 2026数字资产构建系统</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --primary-accent: #38bdf8; /* 天际蓝 - 科技 */
-            --secondary-accent: #fbbf24; /* 琥珀金 - 商业 */
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
+            /* 2026 科技配色 */
+            --bg-deep: #0b1120;       /* 深空底色 */
+            --card-surface: #1e293b;  /* 卡片表面 */
+            --accent-blue: #38bdf8;   /* 量子蓝-科技 */
+            --accent-gold: #f59e0b;   /* 黑金-商业 */
+            --text-primary: #f8fafc;  /* 主文字 */
+            --text-secondary: #94a3b8;/* 次要文字 */
+            --border-glow: rgba(56, 189, 248, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 20%);
-            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-deep);
+            background-image: radial-gradient(circle at top right, rgba(56,189,248,0.1), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(245,158,11,0.05), transparent 40%);
+            color: var(--text-primary);
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            overflow-x: hidden;
         }
 
-        /* 头部区域 */
+        /* 沉浸式头部 */
         header {
-            text-align: center;
-            padding: 4rem 1rem 2rem;
-            max-width: 800px;
-            animation: fadeInDown 1s ease-out;
+            padding: 3rem 1.5rem 1.5rem;
+            text-align: left;
+        }
+
+        .brand-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, var(--primary-accent) 100%);
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(to right, #fff, #cbd5e1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
         }
 
         .subtitle {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            font-weight: 300;
-            line-height: 1.6;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 90%;
         }
 
-        .highlight { color: var(--secondary-accent); font-weight: 600; }
-
-        /* 工具卡片网格 */
+        /* 卡片容器 */
         main {
-            width: 100%;
-            max-width: 1000px;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            animation: fadeInUp 1s ease-out 0.3s backwards;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
+            padding: 0 1rem 2rem;
+            flex: 1;
             display: flex;
             flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* 极速响应卡片 */
+        .card {
+            display: flex;
+            flex-direction: column;
+            background: var(--card-surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.2s ease, background 0.2s;
+            /* 硬件加速，防止卡顿 */
+            transform: translateZ(0); 
+        }
+
+        .card:active {
+            transform: scale(0.98);
+            background: #253248;
+        }
+
+        .card-top {
+            display: flex;
             justify-content: space-between;
-            height: 100%;
+            align-items: center;
+            margin-bottom: 0.8rem;
         }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
-            border-color: rgba(56, 189, 248, 0.3);
-        }
-
-        .card:hover::before { transform: translateX(100%); }
 
         .card-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+            font-size: 1.8rem;
+        }
+
+        .arrow-icon {
+            color: var(--accent-blue);
+            opacity: 0.5;
+            transition: opacity 0.2s;
         }
 
         .card-title {
-            color: var(--text-main);
-            font-size: 1.25rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* 重点高亮词 */
+        .highlight-text {
+            color: var(--accent-gold);
         }
 
         .card-desc {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
 
-        .card-action {
-            color: var(--primary-accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card-action::after {
-            content: '→';
-            transition: transform 0.2s;
-        }
-
-        .card:hover .card-action::after { transform: translateX(5px); }
-
-        /* 底部 */
+        /* 底部版权 */
         footer {
-            margin-top: auto;
-            padding: 3rem 1rem;
             text-align: center;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            width: 100%;
-        }
-
-        .share-link {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            display: inline-block;
+            padding: 2rem 1rem 3rem; /* 底部留白给 iPhone Home Bar */
+            border-top: 1px solid rgba(255,255,255,0.03);
             margin-top: 1rem;
-            color: var(--secondary-accent);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            font-family: monospace;
-            cursor: pointer;
-            transition: all 0.2s;
         }
-        
-        .share-link:hover { background: rgba(251, 191, 36, 0.1); border-color: var(--secondary-accent); }
 
-        /* 动画关键帧 */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* 移动端适配 */
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            main { grid-template-columns: 1fr; padding: 1rem; }
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            opacity: 0.6;
         }
+
+        .wechat-tips {
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        /* 动画 - 简单淡入，不消耗性能 */
+        @keyframes simpleFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        main > a {
+            animation: simpleFade 0.6s ease-out backwards;
+        }
+        main > a:nth-child(1) { animation-delay: 0.1s; }
+        main > a:nth-child(2) { animation-delay: 0.2s; }
+        main > a:nth-child(3) { animation-delay: 0.3s; }
+        main > a:nth-child(4) { animation-delay: 0.4s; }
+        main > a:nth-child(5) { animation-delay: 0.5s; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>徐课长 · AI数字资产系统</h1>
-        <p class="subtitle">
-            专注 AI 赋能与商业变现实战。<br>
-            以<span class="highlight">超级个体</span>思维，构建您的自动化数字财富。
-        </p>
+        <span class="brand-tag">AI 商业赋能 2026</span>
+        <h1>徐课长<br>数字资产实战系统</h1>
+        <p class="subtitle">哲学底层 · 商业思维 · 技术驱动。<br>在这里，构建属于你的超级个体护城河。</p>
     </header>
 
     <main>
-        <!-- 工具 1 -->
-        <a href="2026ai开店1.0.html" class="card">
-            <span class="card-icon">🏪</span>
-            <div class="card-content">
-                <h2 class="card-title">2026 AI 开店 1.0</h2>
-                <p class="card-desc">布局未来电商生态，AI 驱动的自动化店铺运营蓝图。抢占红利期的核心策略。</p>
+        <!-- 核心工具：2026 AI 开店 -->
+        <a href="2026ai开店1.0.html" class="card" style="border-left: 4px solid var(--accent-gold);">
+            <div class="card-top">
+                <span class="card-icon">🚀</span>
+                <span class="arrow-icon">➔</span>
             </div>
-            <div class="card-action">立即启动系统</div>
+            <h2 class="card-title">2026 AI 开店 1.0 <span style="font-size:0.8em; color:var(--accent-gold); margin-left:5px;">旗舰版</span></h2>
+            <p class="card-desc">未来的电商不是卖货，是卖“算法”。掌握 2026 自动化开店核心逻辑。</p>
         </a>
 
-        <!-- 工具 2 -->
+        <!-- 流量工具 -->
         <a href="AI爆款标题生成器.html" class="card">
-            <span class="card-icon">⚡</span>
-            <div class="card-content">
-                <h2 class="card-title">AI 爆款标题生成器</h2>
-                <p class="card-desc">流量的入口。利用算法心理学，一键生成高点击率标题，引爆公域流量。</p>
+            <div class="card-top">
+                <span class="card-icon">🧠</span>
+                <span class="arrow-icon">➔</span>
             </div>
-            <div class="card-action">获取流量密码</div>
+            <h2 class="card-title">AI 爆款标题生成器</h2>
+            <p class="card-desc">基于<span class="highlight-text">消费心理学</span>的算法模型，一键生成击穿用户防线的流量标题。</p>
         </a>
 
-        <!-- 工具 3 -->
+        <!-- 个人成长 -->
         <a href="超级个体.html" class="card">
-            <span class="card-icon">🦸‍♂️</span>
-            <div class="card-content">
-                <h2 class="card-title">超级个体进化论</h2>
-                <p class="card-desc">一人抵一家公司。构建个人IP壁垒，实现时间自由与被动收入的底层逻辑。</p>
+            <div class="card-top">
+                <span class="card-icon">💎</span>
+                <span class="arrow-icon">➔</span>
             </div>
-            <div class="card-action">开始进化</div>
+            <h2 class="card-title">超级个体进化论</h2>
+            <p class="card-desc">摆脱内卷的唯一出路。如何用 AI 放大你的价值，实现时间复利？</p>
         </a>
 
-        <!-- 工具 4 -->
+        <!-- 效率工具 -->
         <a href="sku图片设计神器03.html" class="card">
-            <span class="card-icon">🎨</span>
-            <div class="card-content">
-                <h2 class="card-title">SKU 图片设计神器 03</h2>
-                <p class="card-desc">高转化率的视觉营销工具。零基础也能产出专业级商品图，提升下单率。</p>
+            <div class="card-top">
+                <span class="card-icon">🎨</span>
+                <span class="arrow-icon">➔</span>
             </div>
-            <div class="card-action">提升转化率</div>
+            <h2 class="card-title">SKU 图片设计神器 03</h2>
+            <p class="card-desc">视觉营销实战工具。零成本产出高转化主图，让点击率翻倍。</p>
         </a>
 
-        <!-- 工具 5 -->
+        <!-- 认知提升 -->
         <a href="十分钟商业课完整版ppt.html" class="card">
-            <span class="card-icon">💼</span>
-            <div class="card-content">
-                <h2 class="card-title">十分钟商业课完整版</h2>
-                <p class="card-desc">浓缩的商业智慧。极速掌握商业闭环逻辑，提升认知维度的实战课件。</p>
+            <div class="card-top">
+                <span class="card-icon">🎓</span>
+                <span class="arrow-icon">➔</span>
             </div>
-            <div class="card-action">下载学习资源</div>
+            <h2 class="card-title">十分钟商业课完整版</h2>
+            <p class="card-desc">浓缩商业智慧。极简、深刻、落地，打通商业变现的任督二脉。</p>
         </a>
     </main>
 
     <footer>
-        <p>© 2024 徐课长数字资产构建系统 | 赋能每一个向上的灵魂</p>
-        <div class="share-link" onclick="navigator.clipboard.writeText('https://xukezhang000-png.github.io/xukezhang-ai/');alert('链接已复制，去分享给需要的人吧！')">
-            🔗 点击复制分享链接
-        </div>
+        <p class="copyright">© 2026 徐课长数字资产构建系统</p>
+        <p class="wechat-tips">System Ready · AI Powered</p>
     </footer>
 
 </body>
