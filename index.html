@@ -1,29 +1,246 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>AI 商业工具合集</title>
-  <style>
-    body { font-family: sans-serif; padding: 2em; background: #f9f9f9; }
-    h1 { color: #333; }
-    ul { line-height: 1.8; }
-    a { color: #007acc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐课长 | AI数字资产构建系统</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --primary-accent: #38bdf8; /* 天际蓝 - 科技 */
+            --secondary-accent: #fbbf24; /* 琥珀金 - 商业 */
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 20%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 头部区域 */
+        header {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+            max-width: 800px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .highlight { color: var(--secondary-accent); font-weight: 600; }
+
+        /* 工具卡片网格 */
+        main {
+            width: 100%;
+            max-width: 1000px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .card:hover::before { transform: translateX(100%); }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .card-title {
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-action {
+            color: var(--primary-accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-action::after {
+            content: '→';
+            transition: transform 0.2s;
+        }
+
+        .card:hover .card-action::after { transform: translateX(5px); }
+
+        /* 底部 */
+        footer {
+            margin-top: auto;
+            padding: 3rem 1rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+        }
+
+        .share-link {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--secondary-accent);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            font-family: monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .share-link:hover { background: rgba(251, 191, 36, 0.1); border-color: var(--secondary-accent); }
+
+        /* 动画关键帧 */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            main { grid-template-columns: 1fr; padding: 1rem; }
+        }
+    </style>
 </head>
 <body>
-  <h1>欢迎访问徐课长的数字资产构建系统 AI 商业工具合集</h1>
-  <ul>
-    <li><a href="2026ai开店1.0.html">2026 AI 开店 1.0</a></li>
-    <li><a href="AI爆款标题生成器.html">AI爆款标题生成器</a></li>
-    <li><a href="超级个体.html">超级个体</a></li>
-    <li><a href="sku图片设计神器03.html">SKU 图片设计神器 03</a></li>
-    <li><a href="十分钟商业课完整版ppt.html">十分钟商业课完整版</a></li>
-  </ul>
-  <p>如需分享，请使用链接：<br><strong>https://xukezhang000-png.github.io/xukezhang-ai/</strong></p>
+
+    <header>
+        <h1>徐课长 · AI数字资产系统</h1>
+        <p class="subtitle">
+            专注 AI 赋能与商业变现实战。<br>
+            以<span class="highlight">超级个体</span>思维，构建您的自动化数字财富。
+        </p>
+    </header>
+
+    <main>
+        <!-- 工具 1 -->
+        <a href="2026ai开店1.0.html" class="card">
+            <span class="card-icon">🏪</span>
+            <div class="card-content">
+                <h2 class="card-title">2026 AI 开店 1.0</h2>
+                <p class="card-desc">布局未来电商生态，AI 驱动的自动化店铺运营蓝图。抢占红利期的核心策略。</p>
+            </div>
+            <div class="card-action">立即启动系统</div>
+        </a>
+
+        <!-- 工具 2 -->
+        <a href="AI爆款标题生成器.html" class="card">
+            <span class="card-icon">⚡</span>
+            <div class="card-content">
+                <h2 class="card-title">AI 爆款标题生成器</h2>
+                <p class="card-desc">流量的入口。利用算法心理学，一键生成高点击率标题，引爆公域流量。</p>
+            </div>
+            <div class="card-action">获取流量密码</div>
+        </a>
+
+        <!-- 工具 3 -->
+        <a href="超级个体.html" class="card">
+            <span class="card-icon">🦸‍♂️</span>
+            <div class="card-content">
+                <h2 class="card-title">超级个体进化论</h2>
+                <p class="card-desc">一人抵一家公司。构建个人IP壁垒，实现时间自由与被动收入的底层逻辑。</p>
+            </div>
+            <div class="card-action">开始进化</div>
+        </a>
+
+        <!-- 工具 4 -->
+        <a href="sku图片设计神器03.html" class="card">
+            <span class="card-icon">🎨</span>
+            <div class="card-content">
+                <h2 class="card-title">SKU 图片设计神器 03</h2>
+                <p class="card-desc">高转化率的视觉营销工具。零基础也能产出专业级商品图，提升下单率。</p>
+            </div>
+            <div class="card-action">提升转化率</div>
+        </a>
+
+        <!-- 工具 5 -->
+        <a href="十分钟商业课完整版ppt.html" class="card">
+            <span class="card-icon">💼</span>
+            <div class="card-content">
+                <h2 class="card-title">十分钟商业课完整版</h2>
+                <p class="card-desc">浓缩的商业智慧。极速掌握商业闭环逻辑，提升认知维度的实战课件。</p>
+            </div>
+            <div class="card-action">下载学习资源</div>
+        </a>
+    </main>
+
+    <footer>
+        <p>© 2024 徐课长数字资产构建系统 | 赋能每一个向上的灵魂</p>
+        <div class="share-link" onclick="navigator.clipboard.writeText('https://xukezhang000-png.github.io/xukezhang-ai/');alert('链接已复制，去分享给需要的人吧！')">
+            🔗 点击复制分享链接
+        </div>
+    </footer>
+
 </body>
 </html>
-
-
-
-
