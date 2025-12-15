@@ -1,512 +1,471 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>徐课长AI数字资产 | 爆款标题商业融合版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>PDD 爆款标题黑客 | 徐课长实战系统</title>
     <style>
         :root {
-            /* 融合配色：高端商务白 + 拼多多红 + 鎏金 */
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --primary-red: #e02e24;
-            --gradient-red: linear-gradient(135deg, #e02e24 0%, #ff5c5c 100%);
-            --text-main: #2c3e50;
-            --text-sub: #7f8c8d;
-            --gold-accent: #d4a017;
-            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
-            --shadow-hover: 0 15px 40px rgba(224, 46, 36, 0.15);
+            --bg-core: #0f172a;        /* 深空蓝 */
+            --bg-card: #1e293b;        /* 卡片底 */
+            --bg-input: #0b1120;       /* 输入框 */
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent-pdd: #e02e24;     /* PDD红 */
+            --accent-gold: #fbbf24;    /* 黑金 */
+            --accent-safe: #10b981;    /* 安全绿 */
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            margin: 0;
-            padding: 40px 20px;
-            font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
-            background-color: var(--bg-color);
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-core);
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* ==================== 
-           融合版水印：轻奢银灰 + 倾斜防伪风格
-           ==================== */
-        .watermark-layer {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            z-index: 0;
-            pointer-events: none;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            align-content: space-around;
-            transform: rotate(-30deg);
-            opacity: 0.06; /* 极淡，不干扰阅读 */
-        }
-        .watermark-item {
-            flex: 0 0 auto;
-            margin: 60px 80px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #000;
-            text-align: center;
-            line-height: 1.8;
-            font-family: 'Georgia', serif; /* 增加一点衬线感的商业气息 */
-        }
-
-        /* 主容器 */
-        .container {
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 3rem;
             position: relative;
-            z-index: 10;
-            max-width: 900px; /* 加宽 */
-            margin: 0 auto;
+            overflow-x: hidden;
+            
+            /* --- 核心水印样式 --- */
+            /* 使用 SVG data URI 生成重复的斜纹水印 */
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='14' fill='rgba(255,255,255,0.03)' transform='rotate(-45 150 150)' text-anchor='middle' dominant-baseline='middle'%3E公众号：徐课长 电微：13683520302%3C/text%3E%3C/svg%3E");
         }
 
-        /* 头部：保留V4的标签哲学，使用V5的大气排版 */
-        .header {
+        /* 头部 */
+        header {
+            padding: 2.5rem 1.5rem 1.5rem;
             text-align: center;
-            margin-bottom: 40px;
+            width: 100%;
+            max-width: 800px;
+            z-index: 10;
         }
-        .header h1 {
-            font-size: 34px;
+
+        h1 {
+            font-size: 1.8rem;
             font-weight: 800;
-            color: var(--text-main);
-            margin: 0 0 15px 0;
-            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-pdd) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .header .badges {
+
+        .subtitle { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 12px; }
+
+        .tags-line {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.7rem;
         }
-        .badge {
-            background: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            color: var(--text-sub);
-            border: 1px solid #e1e1e1;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-            font-weight: 600;
+        .tag-pill {
+            background: rgba(255,255,255,0.05);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: var(--accent-gold);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(4px);
         }
-        .badge.gold { border-color: var(--gold-accent); color: #b7890b; }
 
-        /* 配置区：隐蔽但易用 */
-        .config-wrap {
-            background: #fff;
+        /* 设置面板 */
+        .settings-panel {
+            width: 92%;
+            max-width: 600px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
             border-radius: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 1.5rem;
             overflow: hidden;
-            box-shadow: var(--shadow-soft);
+            z-index: 10;
         }
-        .config-header {
-            padding: 15px 20px;
-            background: #f8f9fa;
+
+        .settings-header {
+            padding: 12px 15px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
             cursor: pointer;
-            font-size: 14px;
-            color: var(--primary-red);
-            font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .config-body {
-            display: none;
-            padding: 20px;
-            border-top: 1px solid #eee;
-        }
-        .config-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            box-sizing: border-box;
-            background: #fcfcfc;
+            background: rgba(0,0,0,0.2);
         }
 
-        /* 核心输入卡片：融合 V5的大尺寸 + V4的质感 */
-        .main-card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.3s;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-        .main-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .input-label {
-            font-size: 24px; /* 关爱版的大字号 */
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 20px;
-            display: block;
-        }
+        .settings-content { padding: 15px; display: none; }
+        .settings-content.active { display: block; }
         
-        textarea#productInput {
+        .settings-input {
             width: 100%;
-            height: 160px;
-            padding: 25px;
-            font-size: 26px; /* 融合版大字体 */
-            border: 2px solid #eef0f5;
+            background: var(--bg-input);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        /* 主输入区 */
+        main {
+            width: 100%;
+            max-width: 600px;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            z-index: 10;
+        }
+
+        .input-card {
+            background: var(--bg-card);
             border-radius: 16px;
-            background: #fcfdfe;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .strategy-box { display: flex; gap: 8px; margin-bottom: 1rem; }
+        .strategy-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 5px;
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .strategy-btn.active {
+            background: rgba(224, 46, 36, 0.1);
+            border-color: var(--accent-pdd);
+            color: var(--accent-pdd);
+            font-weight: 700;
+        }
+
+        .main-textarea {
+            width: 100%;
+            height: 110px;
+            background: var(--bg-input);
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--text-main);
+            font-size: 1rem;
             resize: none;
             outline: none;
-            box-sizing: border-box;
-            color: #333;
-            transition: 0.3s;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+            margin-bottom: 1rem;
         }
-        textarea#productInput:focus {
-            border-color: var(--primary-red);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(224, 46, 36, 0.1);
-        }
+        .main-textarea:focus { border-color: var(--accent-pdd); }
 
-        button#generateBtn {
+        .generate-btn {
             width: 100%;
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--gradient-red);
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+            padding: 14px;
             border: none;
-            border-radius: 50px; /* 全圆角 */
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(224, 46, 36, 0.3);
-            transition: all 0.2s;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #ff5c00, var(--accent-pdd));
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(224, 46, 36, 0.3);
         }
-        button#generateBtn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(224, 46, 36, 0.4);
-        }
-        button#generateBtn:active { transform: scale(0.98); }
-        button#generateBtn:disabled { background: #bdc3c7; cursor: not-allowed; box-shadow: none; }
+        .generate-btn:active { transform: scale(0.98); }
 
-        /* 结果区域 */
-        .results-grid {
-            display: none;
-            margin-top: 40px;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
+        /* 结果展示 */
+        #result-area { margin-top: 0.5rem; display: flex; flex-direction: column; gap: 1rem; }
 
         .result-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--shadow-soft);
-            border-top: 5px solid #eee;
-        }
-        /* 风格化配色 */
-        .card-traffic { border-top-color: #3498db; }
-        .card-conv { border-top-color: #9b59b6; }
-        .card-promo { border-top-color: var(--primary-red); }
-
-        .card-head {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .card-icon { font-size: 22px; margin-right: 8px; }
-
-        .title-row {
-            padding: 15px;
-            margin-bottom: 12px;
-            background: #f8f9fa;
+            background: rgba(30, 41, 59, 0.8); /* 稍微不透明一点，遮挡水印，利于阅读 */
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 1rem;
             border-radius: 10px;
-            font-size: 16px;
-            line-height: 1.5;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: 0.2s;
             position: relative;
+            animation: slideUp 0.4s ease-out;
+            backdrop-filter: blur(5px);
         }
-        .title-row:hover {
-            background: #fff;
-            border-color: var(--gold-accent);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transform: scale(1.01);
+
+        .result-title {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            padding-right: 3rem;
+            margin-bottom: 10px;
         }
-        .title-row::after {
-            content: '复制';
+
+        .highlight-keyword { color: var(--accent-gold); font-weight: bold; }
+        
+        /* 修正后的词样式 */
+        .fixed-word {
+            color: var(--accent-safe);
+            border-bottom: 1px dashed var(--accent-safe);
+            font-weight: bold;
+            cursor: help;
+        }
+
+        .result-tags { display: flex; gap: 6px; font-size: 0.7rem; align-items: center; }
+        .tag-safe { color: var(--accent-safe); background: rgba(16,185,129,0.1); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2); }
+        .tag-auto { color: var(--accent-blue); background: rgba(56,189,248,0.1); padding: 2px 6px; border-radius: 4px; }
+
+        .copy-btn {
             position: absolute;
             right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 12px;
-            color: var(--primary-red);
-            opacity: 0;
-            transition: 0.2s;
-            border: 1px solid var(--primary-red);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        .title-row:hover::after { opacity: 1; }
-
-        /* 底部 */
-        .footer {
-            margin-top: 60px;
-            text-align: center;
-            color: #999;
-            font-size: 13px;
-        }
-        
-        /* 加载动画 */
-        .loader-box {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
+            top: 15px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
             color: var(--text-sub);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
         }
+
+        /* 底部页脚 */
+        footer {
+            margin-top: auto;
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.75rem;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+        /* 动画 */
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-red);
+            width: 18px; height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px auto;
+            animation: spin 0.8s linear infinite;
+            display: none;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
 <body>
 
-<!-- 底纹层 -->
-<div class="watermark-layer" id="bgWatermark"></div>
-
-<div class="container">
-    
-    <!-- 头部：品牌与哲思 -->
-    <div class="header">
-        <h1>徐课长 · AI爆款标题生成器</h1>
-        <div class="badges">
-            <span class="badge gold">AI商业思维逻辑</span>
-            <span class="badge">算法机制心理学</span>
-            <span class="badge">视觉符号学</span>
-            <span class="badge">人性深度分析</span>
+    <header>
+        <h1>PDD 标题黑客 <span style="font-size:0.5em; vertical-align:top; color:var(--accent-gold);">2026</span></h1>
+        <p class="subtitle">智能清洗违禁词 · 生成即合规</p>
+        <div class="tags-line">
+            <span class="tag-pill">全自动去风险</span>
+            <span class="tag-pill">2026算法权重</span>
+            <span class="tag-pill">点击率倍增</span>
         </div>
-    </div>
+    </header>
 
-    <!-- API 配置折叠面板 -->
-    <div class="config-wrap">
-        <div class="config-header" onclick="toggleConfig()">
-            <span>⚙️ 连接 AI 大脑 (API Key 设置)</span>
+    <!-- 设置面板 -->
+    <div class="settings-panel">
+        <div class="settings-header" onclick="toggleSettings()">
+            <span>⚙️ 系统设置 (API Key)</span>
             <span>▼</span>
         </div>
-        <div class="config-body" id="configBody">
-            <input type="password" id="apiKey" class="config-input" placeholder="请输入 API Key (OpenAI / DeepSeek / Moonshot)">
-            <input type="text" id="apiUrl" class="config-input" value="https://api.openai.com/v1/chat/completions" placeholder="API Base URL">
-            <input type="text" id="modelName" class="config-input" value="gpt-3.5-turbo" placeholder="模型名称">
-            <div style="font-size:12px; color:#999;">* 设置会自动保存，数据仅在本地处理，安全无忧。</div>
+        <div class="settings-content" id="settings-content">
+            <input type="password" id="apiKey" class="settings-input" placeholder="请输入 API Key (自动保存)" onchange="saveConfig()">
+            <input type="text" id="apiEndpoint" class="settings-input" value="https://ark.cn-beijing.volces.com/api/v3/chat/completions" onchange="saveConfig()">
+            <input type="text" id="modelName" class="settings-input" value="doubao-seed-1-6-251015" onchange="saveConfig()">
         </div>
     </div>
 
-    <!-- 核心操作区：巨物化设计 -->
-    <div class="main-card">
-        <label class="input-label">👇 输入产品名称，一键生成爆款：</label>
-        <textarea id="productInput" placeholder="例如：防晒衣 / 懒人抹布 / 手机支架" onkeydown="if(event.ctrlKey && event.keyCode==13) startEngine()"></textarea>
+    <main>
+        <div class="input-card">
+            <div class="strategy-box">
+                <div class="strategy-btn active" onclick="setStrategy(this, 'price')">🔥 低价跑量</div>
+                <div class="strategy-btn" onclick="setStrategy(this, 'quality')">💎 品质高客单</div>
+                <div class="strategy-btn" onclick="setStrategy(this, 'niche')">🎯 场景/送礼</div>
+            </div>
+
+            <textarea id="userInput" class="main-textarea" placeholder="请输入产品关键词（如：虚拟开店教程、PS软件、副业项目）..."></textarea>
+            
+            <button class="generate-btn" onclick="generateTitles()">
+                <div class="spinner" id="spinner"></div>
+                <span id="btnText">一键生成合规爆款</span>
+            </button>
+        </div>
+
+        <div id="result-area"></div>
+    </main>
+
+    <footer>
+        <p>徐课长AI数字资产构建商业变现实战系统</p>
+        <p style="margin-top:5px; font-size:0.7rem;">Copyright © 2026 All Rights Reserved</p>
+    </footer>
+
+    <script>
+        let currentStrategy = 'price';
         
-        <button id="generateBtn" onclick="startEngine()">
-            <span>🚀</span> 启动 AI 深度分析与生成
-        </button>
+        // --- 核心：违禁词替换词典 (Smart Replacement Map) ---
+        // 键：违禁词，值：合规高点击替代词
+        const replacementMap = {
+            '第一': '行业天花板',
+            '最强': '狠货',
+            '最好': '宝藏',
+            '最佳': '必选',
+            '顶级': '高配',
+            '极致': '发烧级',
+            '完美': '给力',
+            '首选': '必入',
+            '独家': '稀缺',
+            '唯一': '少见',
+            '包赚': '搞米',
+            '躺赚': '副业',
+            '暴富': '起飞',
+            '月入': '变现',
+            '100%': '超稳',
+            '百分百': '超稳',
+            '包过': '助考',
+            '包会': '易上手',
+            '神器': '必备', // 部分类目神器违规，替换为必备
+            '奇效': '给力'
+        };
 
-        <div class="loader-box" id="loader">
-            <div class="spinner"></div>
-            <div>AI 正在解构算法与人性...</div>
-        </div>
-        <div id="errorMsg" style="color:red; text-align:center; margin-top:15px; display:none;"></div>
-    </div>
-
-    <!-- 结果区：清晰分类 -->
-    <div class="results-grid" id="resultArea">
-        
-        <!-- 流量型 -->
-        <div class="result-card card-traffic">
-            <div class="card-head">
-                <span><span class="card-icon">🌊</span>算法引流型</span>
-            </div>
-            <div id="outTraffic"></div>
-        </div>
-
-        <!-- 转化型 -->
-        <div class="result-card card-conv">
-            <div class="card-head">
-                <span><span class="card-icon">🧠</span>认知转化型</span>
-            </div>
-            <div id="outConv"></div>
-        </div>
-
-        <!-- 促销型 -->
-        <div class="result-card card-promo">
-            <div class="card-head">
-                <span><span class="card-icon">🔥</span>人性促销型</span>
-            </div>
-            <div id="outPromo"></div>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        © 徐课长AI数字资产商业运营 | 融合终极版 V6.0
-    </div>
-</div>
-
-<script>
-    window.onload = function() {
-        // 1. 生成徐课长专属水印
-        const watermarkContainer = document.getElementById('bgWatermark');
-        const text = `
-            微信公众号：徐课长     微信号：XKZ201202<br>
-            手机号：13683520302  徐课长AI数字资产商业运营
-        `;
-        // 铺满屏幕
-        for(let i=0; i<30; i++) {
-            let div = document.createElement('div');
-            div.className = 'watermark-item';
-            div.innerHTML = text;
-            watermarkContainer.appendChild(div);
+        window.onload = function() {
+            if(localStorage.getItem('xk_apiKey')) document.getElementById('apiKey').value = localStorage.getItem('xk_apiKey');
+            if(localStorage.getItem('xk_endpoint')) document.getElementById('apiEndpoint').value = localStorage.getItem('xk_endpoint');
+            if(localStorage.getItem('xk_model')) document.getElementById('modelName').value = localStorage.getItem('xk_model');
         }
 
-        // 2. 加载配置
-        if(localStorage.getItem('xkz_key')) document.getElementById('apiKey').value = localStorage.getItem('xkz_key');
-        if(localStorage.getItem('xkz_url')) document.getElementById('apiUrl').value = localStorage.getItem('xkz_url');
-        if(localStorage.getItem('xkz_model')) document.getElementById('modelName').value = localStorage.getItem('xkz_model');
-    }
-
-    function toggleConfig() {
-        const body = document.getElementById('configBody');
-        body.style.display = body.style.display === 'block' ? 'none' : 'block';
-    }
-
-    async function startEngine() {
-        const product = document.getElementById('productInput').value.trim();
-        const apiKey = document.getElementById('apiKey').value.trim();
-        const apiUrl = document.getElementById('apiUrl').value.trim();
-        const modelName = document.getElementById('modelName').value.trim();
-
-        const loader = document.getElementById('loader');
-        const resultArea = document.getElementById('resultArea');
-        const errorMsg = document.getElementById('errorMsg');
-        const btn = document.getElementById('generateBtn');
-
-        if (!product) { alert("⚠️ 请输入产品名称"); return; }
-        if (!apiKey) { 
-            alert("⚠️ 请点击上方设置栏，填入您的 API Key"); 
-            toggleConfig();
-            return; 
+        function toggleSettings() { document.getElementById('settings-content').classList.toggle('active'); }
+        function saveConfig() {
+            localStorage.setItem('xk_apiKey', document.getElementById('apiKey').value);
+            localStorage.setItem('xk_endpoint', document.getElementById('apiEndpoint').value);
+            localStorage.setItem('xk_model', document.getElementById('modelName').value);
+        }
+        function setStrategy(el, type) {
+            document.querySelectorAll('.strategy-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            currentStrategy = type;
         }
 
-        // 保存用户习惯
-        localStorage.setItem('xkz_key', apiKey);
-        localStorage.setItem('xkz_url', apiUrl);
-        localStorage.setItem('xkz_model', modelName);
+        // --- 智能清洗函数 ---
+        function cleanAndReplace(text) {
+            let replacedText = text;
+            let fixedCount = 0;
+            
+            // 遍历词典进行替换
+            for (const [riskWord, safeWord] of Object.entries(replacementMap)) {
+                if (replacedText.includes(riskWord)) {
+                    // 全局替换，并标记样式（暂不加样式，直接改文字，保证复制出来是干净的）
+                    const regex = new RegExp(riskWord, 'g');
+                    replacedText = replacedText.replace(regex, safeWord);
+                    fixedCount++;
+                }
+            }
+            return { text: replacedText, count: fixedCount };
+        }
 
-        // UI 状态切换
-        loader.style.display = 'block';
-        resultArea.style.display = 'none';
-        errorMsg.style.display = 'none';
-        btn.disabled = true;
-        btn.innerHTML = "AI 正在运算中...";
+        async function generateTitles() {
+            const input = document.getElementById('userInput').value;
+            const apiKey = document.getElementById('apiKey').value;
+            const endpoint = document.getElementById('apiEndpoint').value;
+            const model = document.getElementById('modelName').value;
 
-        // 徐课长核心算法思维链 Prompt
-        const systemPrompt = `
-你是由“徐课长”训练的电商搜索算法专家。
-任务：根据用户输入的产品，结合【AI商业思维逻辑】与【拼多多算法机制】，生成三组爆款标题。
+            saveConfig();
+            if (!input) return alert('请先输入关键词！');
+            if (!apiKey) { toggleSettings(); return alert('请先配置 API Key！'); }
 
-请严格执行以下策略：
-1. **Traffic (流量)**：首部必须包含核心大词，利用算法权重。
-2. **Conversion (转化)**：利用认知心理学，击中用户痛点。
-3. **Humanity (人性)**：利用贪婪与紧迫感，使用【】、数字、促销词。
+            const btn = document.querySelector('.generate-btn');
+            const spinner = document.getElementById('spinner');
+            const btnText = document.getElementById('btnText');
+            const resultArea = document.getElementById('result-area');
 
-请以纯 JSON 格式输出：
-{
-  "traffic": ["标题1", "标题2", "标题3"],
-  "conversion": ["标题1", "标题2", "标题3"],
-  "promo": ["标题1", "标题2", "标题3"]
-}
-        `.trim();
+            btn.disabled = true;
+            spinner.style.display = 'block';
+            btnText.innerText = 'AI正在清洗违禁词...';
+            resultArea.innerHTML = '';
 
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: modelName,
-                    messages: [
-                        { role: "system", content: systemPrompt },
-                        { role: "user", content: `产品名称：${product}` }
-                    ],
-                    temperature: 0.8
-                })
+            // Prompt 依然要求 AI 尽量规避，双重保险
+            let strategyContext = currentStrategy === 'price' 
+                ? "策略：低价跑量。用词：【2026清仓】、小白、清仓、手机可做。" 
+                : "策略：品质/服务。用词：【2026升级版】、纯人工、一对一、终身版。";
+
+            const systemPrompt = `你是一名精通2026拼多多新规的电商专家。生成5个无违规的爆款标题。
+            ${strategyContext}
+            要求：包含【2026】或【最新】。绝对不要使用“第一、包赚、100%”等违禁词。
+            格式：5行纯文本。`;
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: [{ role: "system", content: systemPrompt }, { role: "user", content: input }],
+                        temperature: 0.8
+                    })
+                });
+
+                if (!response.ok) throw new Error(`请求失败 (${response.status})`);
+                const data = await response.json();
+                let content = data.choices ? data.choices[0].message.content : JSON.stringify(data);
+                
+                const titles = content.split('\n').filter(t => t.trim().length > 5);
+
+                titles.forEach(title => {
+                    let cleanTitle = title.replace(/^\d+\.\s*/, '').replace(/\*\*/g, '').trim();
+                    
+                    // --- 1. 执行智能替换 ---
+                    const { text: safeTitle, count } = cleanAndReplace(cleanTitle);
+
+                    // --- 2. 视觉处理 ---
+                    // 高亮 【】 里的内容
+                    let displayTitle = safeTitle.replace(/【.*?】/g, match => `<span class="highlight-keyword">${match}</span>`);
+
+                    // --- 3. 生成卡片 ---
+                    const card = document.createElement('div');
+                    card.className = 'result-card';
+                    
+                    // 状态标签
+                    let statusTag = `<span class="tag-safe">✅ 100%合规</span>`;
+                    if (count > 0) {
+                        statusTag += ` <span style="font-size:0.7rem; color:var(--text-sub); margin-left:5px;">(已自动修正 ${count} 处违规)</span>`;
+                    }
+
+                    card.innerHTML = `
+                        <div class="result-title">${displayTitle}</div>
+                        <div class="result-tags">
+                            ${statusTag}
+                        </div>
+                        <button class="copy-btn" onclick="copyText(this, '${safeTitle}')">复制</button>
+                    `;
+                    resultArea.appendChild(card);
+                });
+
+            } catch (error) {
+                alert('生成出错：' + error.message);
+            } finally {
+                btn.disabled = false;
+                spinner.style.display = 'none';
+                btnText.innerText = '一键生成合规爆款';
+            }
+        }
+
+        function copyText(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                let old = btn.innerText;
+                btn.innerText = '已复制';
+                btn.style.color = '#10b981';
+                btn.style.borderColor = '#10b981';
+                setTimeout(() => { 
+                    btn.innerText = old; 
+                    btn.style.color = 'var(--text-sub)'; 
+                    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+                }, 1500);
             });
-
-            if (!response.ok) throw new Error("连接失败，请检查 API Key");
-            
-            const data = await response.json();
-            let content = data.choices[0].message.content;
-            
-            // 简单的 JSON 清洗
-            content = content.replace(/```json/g, '').replace(/```/g, '').trim();
-            const json = JSON.parse(content);
-
-            // 渲染结果
-            renderGroup('outTraffic', json.traffic);
-            renderGroup('outConv', json.conversion);
-            renderGroup('outPromo', json.promo);
-
-            resultArea.style.display = 'grid';
-
-        } catch (e) {
-            errorMsg.innerText = "生成出错：" + e.message;
-            errorMsg.style.display = 'block';
-        } finally {
-            loader.style.display = 'none';
-            btn.disabled = false;
-            btn.innerHTML = "🚀 再次生成";
         }
-    }
-
-    function renderGroup(id, titles) {
-        const container = document.getElementById(id);
-        container.innerHTML = '';
-        titles.forEach(t => {
-            const div = document.createElement('div');
-            div.className = 'title-row';
-            div.innerText = t;
-            div.onclick = () => {
-                navigator.clipboard.writeText(t);
-                alert("✅ 复制成功！\n" + t);
-            };
-            container.appendChild(div);
-        });
-    }
-</script>
-
+    </script>
 </body>
 </html>
