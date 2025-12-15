@@ -543,17 +543,39 @@
             <div class="slide-number">10 / 71</div>
         </div>
 
-        <!-- 第11页：成交三要素模型 -->
+        <!-- 第11页：成交三要素模型（已修正位置） -->
         <div class="slide">
             <h2>成交三要素（缺一不可）</h2>
-            <div style="margin: 60px auto; max-width: 600px; position: relative; height: 400px;">
-                <div style="width: 0; height: 0; border-left: 250px solid transparent; border-right: 250px solid transparent; border-bottom: 400px solid rgba(255, 164, 0, 0.2); margin: 0 auto; position: relative;">
-                    <div style="position: absolute; top: 50px; left: 50%; transform: translateX(-50%); color: #ffa400; font-size: 32px; font-weight: 700;">需求</div>
-                    <div style="position: absolute; bottom: 50px; left: -180px; color: #667eea; font-size: 32px; font-weight: 700;">信任</div>
-                    <div style="position: absolute; bottom: 50px; right: -230px; color: #00d9a3; font-size: 32px; font-weight: 700;">购买力</div>
+            <!-- 使用 SVG 绘制三角形以确保定位精准 -->
+            <div style="position: relative; width: 600px; height: 450px; margin: 40px auto;">
+                
+                <!-- 三角形图形 -->
+                <svg width="100%" height="100%" viewBox="0 0 600 450" style="overflow: visible;">
+                    <!-- 顶点 (300, 50), 左下 (50, 400), 右下 (550, 400) -->
+                    <polygon points="300,50 50,400 550,400" fill="rgba(255, 164, 0, 0.15)" stroke="#ffa400" stroke-width="3"/>
+                </svg>
+
+                <!-- 顶部文字：需求 -->
+                <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; color: #ffa400; background: #16213e; padding: 5px 15px; border-radius: 8px; border: 2px solid #ffa400;">需求</div>
+                </div>
+
+                <!-- 左下文字：信任 -->
+                <div style="position: absolute; bottom: 20px; left: 0; transform: translateX(-10%); text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; color: #667eea; background: #16213e; padding: 5px 15px; border-radius: 8px; border: 2px solid #667eea;">信任</div>
+                </div>
+
+                <!-- 右下文字：购买力 -->
+                <div style="position: absolute; bottom: 20px; right: 0; transform: translateX(10%); text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; color: #00d9a3; background: #16213e; padding: 5px 15px; border-radius: 8px; border: 2px solid #00d9a3;">购买力</div>
+                </div>
+
+                <!-- 中心文字 -->
+                <div style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                    <div style="font-size: 48px; font-weight: 700; color: #ffffff; text-shadow: 0 0 20px rgba(255,255,255,0.5);">成交</div>
                 </div>
             </div>
-            <h3 style="margin-top: 40px; border: none; padding: 0; text-align: center; color: #00d9a3;">三者同时具备 = 成交</h3>
+            <h3 style="margin-top: 20px; border: none; padding: 0; text-align: center; color: #b8b8b8; font-weight: 400;">缺一角 = 无法成交</h3>
             <div class="slide-number">11 / 71</div>
         </div>
 
@@ -628,15 +650,15 @@
                 <div style="background: linear-gradient(135deg, #ffa400 0%, #ff6b35 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
                     第4步：被依赖 ⭐⭐⭐⭐
                 </div>
-                <div class="arrow" style="text-align: center;">↑</div>
+                <div class="arrow" style="text-align: center;">↓</div>
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
                     第3步：被需要 ⭐⭐⭐
                 </div>
-                <div class="arrow" style="text-align: center;">↑</div>
+                <div class="arrow" style="text-align: center;">↓</div>
                 <div style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
                     第2步：被认可 ⭐⭐
                 </div>
-                <div class="arrow" style="text-align: center;">↑</div>
+                <div class="arrow" style="text-align: center;">↓</div>
                 <div style="background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 8px; margin: 15px 0; font-size: 28px; font-weight: 700; text-align: center;">
                     第1步：被看见 ⭐
                 </div>
@@ -659,8 +681,6 @@
             </div>
             <div class="slide-number">17 / 71</div>
         </div>
-
-        <!-- 继续第18-71页... 由于篇幅限制，我会继续创建剩余页面 -->
         
         <!-- 第18页：钩子思维案例 -->
         <div class="slide">
@@ -716,12 +736,7 @@
             <div class="slide-number">20 / 71</div>
         </div>
 
-        <!-- 由于完整HTML太长，我将继续创建关键页面 -->
-        <!-- 为了实用性，我会创建一个完整但精简的版本 -->
-
-        <!-- 第21-70页省略部分类似结构... -->
-        <!-- 直接跳到关键页面和结尾 -->
-                <!-- 第21页：知识博主案例 -->
+        <!-- 第21页：知识博主案例 -->
         <div class="slide">
             <h3>知识博主的转化突破</h3>
             <div class="case-box">
@@ -921,8 +936,8 @@
             <p style="margin-top: 60px; font-size: 24px; color: #ffa400;">根据目标用户选择合适形式</p>
             <div class="slide-number">29 / 71</div>
         </div>
-
-        <!-- 第30页：过渡页 -->
+        
+        <!-- 第30-38页 -->
         <div class="slide">
             <h2>有了信任，下一步是变现</h2>
             <div class="big-number" style="margin: 60px 0;">💰</div>
@@ -934,7 +949,6 @@
             <div class="slide-number">30 / 71</div>
         </div>
 
-        <!-- 第31页：引入问题 -->
         <div class="slide">
             <h2>同样的知识，不同的价格</h2>
             <div style="margin: 60px auto; max-width: 600px;">
@@ -962,7 +976,6 @@
             <div class="slide-number">31 / 71</div>
         </div>
 
-        <!-- 第32页：四阶段模型全景 -->
         <div class="slide">
             <h2>用户付费的四个认知阶段</h2>
             <div class="pyramid" style="margin-top: 60px;">
@@ -983,7 +996,6 @@
             <div class="slide-number">32 / 71</div>
         </div>
 
-        <!-- 第33页：阶段1免费获取 -->
         <div class="slide">
             <h3>阶段1：免费获取</h3>
             <div class="quote-box" style="margin-top: 40px;">
@@ -1001,7 +1013,6 @@
             <div class="slide-number">33 / 71</div>
         </div>
 
-        <!-- 第34页：时间成本公式 -->
         <div class="slide">
             <h3>时间成本计算</h3>
             <div class="case-box" style="margin-top: 50px;">
@@ -1026,7 +1037,6 @@
             <div class="slide-number">34 / 71</div>
         </div>
 
-        <!-- 第35页：阶段2试探性付费 -->
         <div class="slide">
             <h3>阶段2：试探性付费</h3>
             <div class="quote-box" style="margin-top: 40px;">
@@ -1047,7 +1057,6 @@
             <div class="slide-number">35 / 71</div>
         </div>
 
-        <!-- 第36页：阶段3价值认知付费 -->
         <div class="slide">
             <h3>阶段3：价值认知付费</h3>
             <div class="quote-box" style="margin-top: 40px;">
@@ -1071,7 +1080,6 @@
             <div class="slide-number">36 / 71</div>
         </div>
 
-        <!-- 第37页：阶段4风格体验付费 -->
         <div class="slide">
             <h3>阶段4：风格体验付费</h3>
             <h2 style="margin: 40px 0; color: #ffa400; font-size: 38px;">（最高级付费）</h2>
@@ -1092,7 +1100,6 @@
             <div class="slide-number">37 / 71</div>
         </div>
 
-        <!-- 第38页：樊登/得到案例 -->
         <div class="slide">
             <h3>经典案例</h3>
             <div class="comparison">
@@ -1121,8 +1128,8 @@
             <div class="slide-number">38 / 71</div>
         </div>
 
-        <!-- 第39页：两句金句 -->
-        <div class="slide">
+        <!-- 39-60页 -->
+         <div class="slide">
             <h2 style="margin-bottom: 80px;">记住这两句话</h2>
             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px; border-radius: 12px; margin-bottom: 50px;">
                 <h1 style="font-size: 42px; line-height: 1.6;">免费的知识最贵<br><span style="font-size: 32px; margin-top: 20px; display: inline-block; color: #e0e0e0;">因为你要用时间和试错成本换</span></h1>
@@ -1134,7 +1141,6 @@
             <div class="slide-number">39 / 71</div>
         </div>
 
-        <!-- 第40页：定价困境 -->
         <div class="slide">
             <h2 style="margin-bottom: 60px;">定价困境</h2>
             <div class="comparison">
@@ -1154,7 +1160,6 @@
             <div class="slide-number">40 / 71</div>
         </div>
 
-        <!-- 第41页：分层模型全景 -->
         <div class="slide">
             <h2>分层变现模型</h2>
             <div class="pyramid" style="margin-top: 60px;">
@@ -1174,7 +1179,6 @@
             <div class="slide-number">41 / 71</div>
         </div>
 
-        <!-- 第42页：第1层低价课 -->
         <div class="slide">
             <h3>第1层：入门低价课</h3>
             <h2 style="margin: 40px 0; color: #00d9a3;">定价：<span style="font-size: 52px;">19.9元 - 99元</span></h2>
@@ -1192,7 +1196,6 @@
             <div class="slide-number">42 / 71</div>
         </div>
 
-        <!-- 第43页：第2层中阶课 -->
         <div class="slide">
             <h3>第2层：中阶进阶课</h3>
             <h2 style="margin: 40px 0; color: #667eea;">定价：<span style="font-size: 52px;">199元 - 999元</span></h2>
@@ -1215,7 +1218,6 @@
             <div class="slide-number">43 / 71</div>
         </div>
 
-        <!-- 第44页：第3层高阶服务 -->
         <div class="slide">
             <h3>第3层：高阶服务</h3>
             <h2 style="margin: 40px 0; color: #ffa400;">定价：<span style="font-size: 52px;">1999元 - 9999元+</span></h2>
@@ -1232,10 +1234,6 @@
             <div class="slide-number">44 / 71</div>
         </div>
 
-        <!-- 继续第45-64页... -->
-        
-        
-        <!-- 第45页：三层对比表 -->
         <div class="slide">
             <h3>三层对比总结</h3>
             <div style="margin: 60px auto; max-width: 1000px;">
@@ -1276,8 +1274,6 @@
             <div class="slide-number">45 / 71</div>
         </div>
 
-        <!-- 继续补充第46-64页代码... -->
-                <!-- 第46页：写作课学员案例 -->
         <div class="slide">
             <h3>真实案例：写作课学员</h3>
             <div class="comparison">
@@ -1311,7 +1307,6 @@
             <div class="slide-number">46 / 71</div>
         </div>
 
-        <!-- 第47页：过渡页 -->
         <div class="slide">
             <h2>有了分层产品，接下来...</h2>
             <div class="big-number" style="margin: 60px 0;">🔥</div>
@@ -1324,7 +1319,6 @@
             <div class="slide-number">47 / 71</div>
         </div>
 
-        <!-- 第48页：什么是爆款 -->
         <div class="slide">
             <h2>什么是真正的爆款内容？</h2>
             <div class="comparison" style="margin-top: 60px;">
@@ -1350,7 +1344,6 @@
             <div class="slide-number">48 / 71</div>
         </div>
 
-        <!-- 第49页：四步法全景 -->
         <div class="slide">
             <h2>爆款内容四步法</h2>
             <div style="margin: 80px auto; max-width: 800px; position: relative;">
@@ -1379,7 +1372,6 @@
             <div class="slide-number">49 / 71</div>
         </div>
 
-        <!-- 第50页：选题挖掘三方法 -->
         <div class="slide">
             <h3>第1步：选题挖掘</h3>
             <h2 style="margin: 30px 0; color: #e94560; font-size: 38px;">选题对了，成功一半！</h2>
@@ -1400,7 +1392,6 @@
             <div class="slide-number">50 / 71</div>
         </div>
 
-        <!-- 第51页：蓝海选题案例 -->
         <div class="slide">
             <h3>蓝海选题的威力</h3>
             <div class="comparison" style="margin-top: 60px;">
@@ -1429,7 +1420,6 @@
             <div class="slide-number">51 / 71</div>
         </div>
 
-        <!-- 第52页：爆款结构公式 -->
         <div class="slide">
             <h3>第2步：结构移植</h3>
             <h2 style="margin: 30px 0;">学习爆款的底层结构</h2>
@@ -1457,7 +1447,6 @@
             <div class="slide-number">52 / 71</div>
         </div>
 
-        <!-- 第53页：结构案例展示 -->
         <div class="slide">
             <h3>结构移植案例</h3>
             <div class="case-box" style="margin-top: 40px;">
@@ -1483,7 +1472,6 @@
             <div class="slide-number">53 / 71</div>
         </div>
 
-        <!-- 第54页：观点杂交示意图 -->
         <div class="slide">
             <h3>第3步：观点杂交</h3>
             <h2 style="margin: 30px 0;">跨界组合，制造差异</h2>
@@ -1506,7 +1494,6 @@
             <div class="slide-number">54 / 71</div>
         </div>
 
-        <!-- 第55页：跨界案例 -->
         <div class="slide">
             <h3>观点杂交实例</h3>
             <div style="margin-top: 50px;">
@@ -1536,7 +1523,6 @@
             <div class="slide-number">55 / 71</div>
         </div>
 
-        <!-- 第56页：风格的重要性 -->
         <div class="slide">
             <h3>第4步：风格再造</h3>
             <h2 style="margin: 30px 0; color: #e94560; font-size: 42px;">（最关键的一步）</h2>
@@ -1559,7 +1545,6 @@
             <div class="slide-number">56 / 71</div>
         </div>
 
-        <!-- 第57页：三大IP案例 -->
         <div class="slide">
             <h3>风格的力量</h3>
             <div style="margin-top: 50px;">
@@ -1587,7 +1572,6 @@
             <div class="slide-number">57 / 71</div>
         </div>
 
-        <!-- 第58页：同质化现象 -->
         <div class="slide">
             <h2 style="margin-bottom: 60px;">你发现了吗？</h2>
             <div class="list" style="margin-top: 50px;">
@@ -1608,7 +1592,6 @@
             <div class="slide-number">58 / 71</div>
         </div>
 
-        <!-- 第59页：差异化vs同质化对比 -->
         <div class="slide">
             <h2>差异化 vs 同质化</h2>
             <div class="comparison" style="margin-top: 60px;">
@@ -1639,7 +1622,6 @@
             <div class="slide-number">59 / 71</div>
         </div>
 
-        <!-- 第60页：差异化风格的力量 -->
         <div class="slide">
             <h3>打造差异化风格</h3>
             <div style="margin-top: 50px;">
@@ -1681,7 +1663,6 @@
             <div class="slide-number">60 / 71</div>
         </div>
 
-        <!-- 第61页：风格标签云 -->
         <div class="slide">
             <h2 style="margin-bottom: 60px;">你的独特风格</h2>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto;">
@@ -1704,7 +1685,6 @@
             <div class="slide-number">61 / 71</div>
         </div>
 
-        <!-- 第62页：10%竞争力策略 -->
         <div class="slide">
             <h2>保留10%核心竞争力</h2>
             <div style="margin: 60px auto; max-width: 800px; background: rgba(255, 164, 0, 0.15); padding: 40px; border-radius: 12px;">
@@ -1734,7 +1714,6 @@
             <div class="slide-number">62 / 71</div>
         </div>
 
-        <!-- 第63页：三个保留方法 -->
         <div class="slide">
             <h3>如何保留10%？</h3>
             <div style="margin-top: 50px;">
@@ -1760,7 +1739,6 @@
             <div class="slide-number">63 / 71</div>
         </div>
 
-        <!-- 第64页：不可替代性金句 -->
         <div class="slide">
             <div style="margin: 100px 0;">
                 <h1 style="font-size: 56px; line-height: 1.5; text-align: center;">
@@ -1782,7 +1760,6 @@
             <div class="slide-number">64 / 71</div>
         </div>
 
-        <!-- 第65页：核心回顾 -->
         <div class="slide">
             <h2 style="margin-bottom: 40px;">25分钟，你学到了什么？</h2>
             <div class="list" style="margin-top: 40px;">
@@ -1797,7 +1774,6 @@
             <div class="slide-number">65 / 71</div>
         </div>
 
-        <!-- 第66页：行动建议 -->
         <div class="slide">
             <h2>现在，你可以做这3件事</h2>
             <div style="margin-top: 60px;">
@@ -1818,7 +1794,6 @@
             <div class="slide-number">66 / 71</div>
         </div>
 
-        <!-- 第67页：资料包介绍 -->
         <div class="slide">
             <h1 style="font-size: 48px; margin-bottom: 40px;">🎁 限时福利</h1>
             <h2>《商业操作系统实战手册》</h2>
@@ -1835,18 +1810,16 @@
             </div>
             <div class="slide-number">67 / 71</div>
         </div>
-
-        <!-- 第68页：二维码 -->
+	
         <div class="slide">
-            <div class="qr-code">
-                [二维码位置]<br>扫码领取
-            </div>
+           <div class="qr-code">
+    <img src="./wx.png" alt="扫码领取" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
             <h2 style="margin-top: 40px;">👇 长按识别二维码 👇</h2>
             <p style="margin-top: 30px; font-size: 24px; color: #e94560;">限时免费，先到先得</p>
             <div class="slide-number">68 / 71</div>
         </div>
 
-        <!-- 第69页：训练营介绍 -->
         <div class="slide">
             <h2 style="margin-bottom: 30px;">想要更系统的学习？</h2>
             <h1 style="font-size: 42px; color: #ffa400; margin-bottom: 50px;">《0-1商业实战训练营》</h1>
@@ -1863,7 +1836,6 @@
             <div class="slide-number">69 / 71</div>
         </div>
 
-        <!-- 第70页：结尾金句 -->
         <div class="slide">
             <h1 style="font-size: 42px; line-height: 1.6; margin-bottom: 60px;">商业的终极竞争<br>是认知、信任和不可替代性</h1>
             <div class="arrow" style="font-size: 60px;">↓</div>
@@ -1874,7 +1846,6 @@
             <div class="slide-number">70 / 71</div>
         </div>
 
-        <!-- 第71页：片尾 -->
         <div class="slide">
             <h1 style="margin-bottom: 60px;">感谢观看</h1>
             <h2 style="margin-bottom: 40px; font-size: 32px;">徐课长商业课</h2>
@@ -1883,7 +1854,7 @@
                 <p style="font-size: 28px;">👍 点赞 | 🔖 收藏 | 📤 分享</p>
             </div>
             <div class="qr-code">
-    <img src="您的二维码图片.png" style="width: 100%; height: 100%; object-fit: contain;">
+    <img src="wx.png" style="width: 100%; height: 100%; object-fit: contain;">
 </div>
             <p style="margin-top: 40px; font-size: 18px; color: #b8b8b8;">#商业认知 #创业思维 #副业赚钱</p>
             <div class="slide-number">71 / 71</div>
